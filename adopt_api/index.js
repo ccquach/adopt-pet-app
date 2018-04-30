@@ -9,12 +9,18 @@ const express    = require('express'),
       morgan     = require('morgan'),
       port       = process.env.PORT || 3000;
 
+// require routes
+const petRoutes = require('./routes/pets');
+
 // app config
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 app.use(morgan('tiny'));
-app.use(express.static(__dirname + '/public'));
+app.use(express.static(__dirname + '/public/assets/data'));
+
+// use routes
+app.use('/api/pets', petRoutes);
 
 // error handling
 app.use(function(req, res, next) {
