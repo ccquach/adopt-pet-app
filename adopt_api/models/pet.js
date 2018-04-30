@@ -37,6 +37,10 @@ const petSchema = new mongoose.Schema({
     type: Boolean,
     default: true
   },
+  img: {
+    type: String,
+    required: 'Pet image required.'
+  },
   created_date: {
     type: Date,
     default: Date.now
