@@ -1,3 +1,7 @@
+// dotenv config
+require('dotenv').config();
+
+// set variables
 const express    = require('express'),
       app        = express(),
       bodyParser = require('body-parser'),
@@ -5,11 +9,14 @@ const express    = require('express'),
       morgan     = require('morgan'),
       port       = process.env.PORT || 3000;
 
+// app config
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 app.use(morgan('tiny'));
+app.use(express.static(__dirname + '/public'));
 
+// error handling
 app.use(function(req, res, next) {
   let err = new Error("Not Found");
   err.status = 404;
@@ -24,6 +31,7 @@ app.use(function(err, req, res, next) {
   });
 });
 
+// start server
 app.listen(port, function() {
   console.log(`Serving adopt pet app on port ${port}`);
 });
