@@ -1,0 +1,26 @@
+{
+  "name": "adopt_api",
+  "version": "1.0.0",
+  "description": "adopt pet app backend",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ccquach/adopt-pet-app.git"
+  },
+  "author": "cynthia.quach",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ccquach/adopt-pet-app/issues"
+  },
+  "homepage": "https://github.com/ccquach/adopt-pet-app#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "cors": "^2.8.4",
+    "express": "^4.16.3",
+    "mongoose": "^5.0.16",
+    "morgan": "^1.9.0"
+  }
+}
