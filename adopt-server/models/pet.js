@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const dogBreeds = require('../public/assets/data/dogs.json');
 
-const COLORS = ['brown', 'black', 'gray', 'white', 'red'];
+const COLORS = ['Brown', 'Black', 'Gray', 'White', 'Red'];
 const GENDERS = ["F", "M"];
 const BREEDS = dogBreeds.dogs;
 
@@ -23,7 +23,7 @@ const petSchema = new mongoose.Schema({
   },
   color: {
     type: String,
-    set: lowercase,
+    set: capitalize,
     enum: COLORS,
     required: 'Pet coat color required.'
   },
@@ -50,10 +50,6 @@ const petSchema = new mongoose.Schema({
 function capitalize(val) {
   if (typeof val !== 'string') val = '';
   return val.charAt(0).toUpperCase() + val.substring(1).toLowerCase();
-}
-
-function lowercase(val) {
-  return val.toLowerCase();
 }
 
 const Pet = mongoose.model('Pet', petSchema);
