@@ -5,7 +5,7 @@ const pets = (state = [], action) => {
   switch (action.type) {
     case GET_PETS:
       // debugger;
-      return [ ...state, ...action.data ];
+      return [ ...action.data ];
     default:
       return state;
   }
