@@ -20,7 +20,7 @@ class PetList extends Component {
       />
     ));
     return(
-      <div>
+      <div className="pet-list">
         {pets}
       </div>
     );
