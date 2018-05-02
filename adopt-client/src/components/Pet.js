@@ -1,7 +1,7 @@
 import React from 'react';
 import './Pet.css';
 
-const Pet = ({ pet }) => {
+const Pet = ({ pet, onDelete }) => {
   const availableDate = new Date(pet.created_date).toDateString();
   const gender = {
     "M": "Male",
@@ -9,6 +9,13 @@ const Pet = ({ pet }) => {
   }
   return (
     <div className="pet-item">
+      <button
+        className="delete-button"
+        type="button"
+        onClick={onDelete}
+      >
+        X
+      </button>
       <div  className="pet-item-image">
         <img src={pet.img} alt={pet.name} />
       </div>

@@ -7,7 +7,6 @@ export const DELETE_PET = "DELETE_PET";
 const API_URL = 'http://localhost:3001/api/pets/';
 
 function handleLoad(data) {
-  // debugger;
   return {
     type: LOAD_PETS,
     data
@@ -21,8 +20,14 @@ function handleAdd(pet) {
   };
 }
 
+function handleDelete(id) {
+  return {
+    type: DELETE_PET,
+    id
+  }
+}
+
 export function loadPets() {
-  // debugger;
   return dispatch => {
     return fetch(API_URL)
       .then(res => res.json())
@@ -32,7 +37,6 @@ export function loadPets() {
 }
 
 export function addPet(pet) {
-  debugger;
   return dispatch => {
     return fetch(API_URL, {
       method: 'POST',
@@ -44,5 +48,16 @@ export function addPet(pet) {
       .then(res => res.json())
       .then(data => dispatch(handleAdd(data)))
       .catch(err => console.log('Something went wrong.', err));
-  }
+  };
+}
+
+export function deletePet(id) {
+  return dispatch => {
+    return fetch(API_URL + id, {
+      method: 'DELETE'
+    })
+      .then(res => res.json())
+      .then(data => dispatch(handleDelete(id)))
+      .catch(err => console.log('Something went wrong.', err));
+  };
 }

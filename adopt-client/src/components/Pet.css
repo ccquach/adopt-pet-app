@@ -10,6 +10,7 @@
     0 2px 2px 0 rgba(0, 0, 0, 0.14), 
     0 1px 5px 0 rgba(0, 0, 0, 0.12), 
     0 3px 1px -2px rgba(0, 0, 0, 0.2);
+  position: relative;
 }
 
 .pet-item-image {
@@ -35,6 +36,23 @@
 .pet-content-label {
   font-weight: 700;
   color: #566270;
+}
+
+.delete-button {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  opacity: 0.8;
+  color: red;
+  background: #E0E3DA;
+  border: none;
+  border-radius: 25px;
+  padding: 5px 8px;
+}
+
+.delete-button:hover {
+  cursor: pointer;
+  opacity: 1;
 }
 
 @media (max-width: 1000px) {
