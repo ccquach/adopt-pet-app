@@ -1,20 +1,30 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './Pet.css';
+import 'font-awesome/css/font-awesome.min.css';
 
 const Pet = ({ pet, onDelete }) => {
   const availableDate = new Date(pet.created_date).toDateString();
   const gender = {
     "M": "Male",
     "F": "Female"
-  }
+  };
   return (
     <div className="pet-item-container">
       <button
-        className="delete-button"
+        className="update-button item-button"
+        type="button"
+      >
+        <Link to={`/pets/edit/${pet._id}`}>
+          <i className="fa fa-edit"></i>
+        </Link>
+      </button>
+      <button
+        className="delete-button item-button"
         type="button"
         onClick={onDelete}
       >
-        X
+        <i className="fa fa-trash"></i>
       </button>
       <div className="pet-item">
         <div  className="pet-item-image">

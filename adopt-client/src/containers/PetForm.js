@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import './NewPetForm.css';
+import './PetForm.css';
+import FormTitle from '../components/FormTitle';
 import defaultImg from '../images/img_default.png';
 
 const BREEDS = ["Dalmatian", "Irish Terrier", "Longhaired Whippet"];
 const COLORS = ['Brown', 'Black', 'Gray', 'White', 'Red'];
 
-class NewPetForm extends Component {
+class PetForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -19,12 +20,28 @@ class NewPetForm extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
+  componentDidMount() {
+    const id = this.props.match.params.id;
+    const pets = this.props.pets;
+    if (id && pets.length > 0) {
+      const pet = pets.find(pet => pet._id === id);
+      this.setState({ 
+        name: pet.name,
+        age: pet.age,
+        gender: pet.gender,
+        breed: pet.breed,
+        color: pet.color,
+        img: pet.img
+      });
+    }
+  }
   handleChange(e) {
     this.setState({ [e.target.name]: e.target.value });
   }
   handleSubmit(e) {
     e.preventDefault();
-    this.props.onSubmit({ ...this.state });
+    const id = this.props.match.params.id; 
+    this.props.onSubmit({ ...this.state }, id);
     e.target.reset();
     this.props.history.push("/pets");
   }
@@ -34,7 +51,7 @@ class NewPetForm extends Component {
     const colorOptions = getSelectOptions(COLORS);
     return(
       <div className="pet-form-container">
-        <h2>New Pet Form</h2>
+        <FormTitle text={this.props.type} />
         <form className="pet-form" onSubmit={this.handleSubmit}>
           {/* form inputs */}
           <div className="pet-input-section">
@@ -48,6 +65,7 @@ class NewPetForm extends Component {
                 value={name}
                 autoComplete="off"
                 onChange={this.handleChange}
+                autoFocus
               />
             </label>
             <label htmlFor="pet-age-input">
@@ -73,8 +91,8 @@ class NewPetForm extends Component {
                     key="female"
                     name="gender"
                     type="radio"
-                    value="f"
-                    checked={gender === "f"}
+                    value="F"
+                    checked={gender === "F"}
                   />
                   Female
                 </label>
@@ -84,8 +102,8 @@ class NewPetForm extends Component {
                     key="male"
                     name="gender"
                     type="radio"
-                    value="m"
-                    checked={gender === "m"}
+                    value="M"
+                    checked={gender === "M"}
                   />
                   Male
                 </label>
@@ -164,4 +182,4 @@ function getSelectOptions(arr) {
   }, [<option key="default"></option>]);
 }
 
-export default NewPetForm;
+export default PetForm;

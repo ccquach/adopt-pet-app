@@ -3,12 +3,6 @@
   width: 100vw;
 }
 
-.pet-form-container h2 {
-  text-align: center;
-  color: #A593E0;
-  text-shadow: 2px 4px 3px rgba(86, 98, 112, 0.2);
-}
-
 .pet-form {
   width: 90%;
   max-width: 1000px;

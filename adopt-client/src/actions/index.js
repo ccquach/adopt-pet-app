@@ -20,6 +20,13 @@ function handleAdd(pet) {
   };
 }
 
+function handleUpdate(pet) {
+  return {
+    type: UPDATE_PET,
+    pet
+  }
+}
+
 function handleDelete(id) {
   return {
     type: DELETE_PET,
@@ -46,9 +53,24 @@ export function addPet(pet) {
       body: JSON.stringify(pet)
     })
       .then(res => res.json())
-      .then(data => dispatch(handleAdd(data)))
+      .then(newPet => dispatch(handleAdd(newPet)))
       .catch(err => console.log('Something went wrong.', err));
   };
+}
+
+export function updatePet(pet, id) {
+  return dispatch => {
+    return fetch(API_URL + id, {
+      method: 'PUT',
+      headers: new Headers({
+        'Content-Type': 'application/json'
+      }),
+      body: JSON.stringify(pet)
+    })
+      .then(res => res.json())
+      .then(updatedPet => dispatch(handleUpdate(updatedPet)))
+      .catch(err => console.log('Something went wrong.', err));
+  }
 }
 
 export function deletePet(id) {

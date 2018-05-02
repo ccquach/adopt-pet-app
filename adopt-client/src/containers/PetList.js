@@ -1,22 +1,25 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Route } from 'react-router-dom';
-import { loadPets, addPet, deletePet } from '../actions/index';
+import { Switch, Route } from 'react-router-dom';
+import { loadPets, addPet, updatePet, deletePet } from '../actions/index';
 import Pet from '../components/Pet';
-import NewPetForm from './NewPetForm';
+import PetForm from './PetForm';
 import './PetList.css';
 
 class PetList extends Component {
   constructor(props) {
     super(props);
     this.handleAdd = this.handleAdd.bind(this);
-    this.handleDelete = this.handleDelete.bind(this);
+    this.handleUpdate = this.handleUpdate.bind(this);
   }
   componentDidMount() {
     this.props.loadPets();
   }
   handleAdd(val) {
     this.props.addPet(val);
+  }
+  handleUpdate(pet, id) {
+    this.props.updatePet(pet, id);
   }
   handleDelete(id) {
     this.props.deletePet(id);
@@ -32,14 +35,28 @@ class PetList extends Component {
     ));
     return(
       <div>
-        <Route exact path="/pets/new" component={props => (
-          <NewPetForm { ...props } onSubmit={ this.handleAdd } />
-        )} />
-        <Route exact path="/pets" component={() => (
-          <div className="pet-list">
-            {pets}
-          </div>
-        )} />
+        <Switch>
+          <Route exact path="/pets/new" render={props => (
+            <PetForm 
+              { ...props } 
+              type="New" 
+              onSubmit={this.handleAdd} 
+            />
+          )} />
+          <Route path="/pets/edit/:id" render={props => (
+            <PetForm 
+              { ...props } 
+              type="Edit" 
+              pets={this.props.pets} 
+              onSubmit={this.handleUpdate} 
+            />
+          )} />
+          <Route exact path="/pets" render={() => (
+            <div className="pet-list">
+              {pets}
+            </div>
+          )} />
+        </Switch>
       </div>
     );
   }
@@ -52,4 +69,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, { loadPets, addPet, deletePet })(PetList);
+export default connect(mapStateToProps, { loadPets, addPet, updatePet, deletePet })(PetList);
