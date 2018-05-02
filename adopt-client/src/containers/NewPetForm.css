@@ -80,4 +80,5 @@
 .submit-button:hover {
   background: #A593E0;
   color: #FFFFF3;
+  transition: all 0.2s linear;
 }
