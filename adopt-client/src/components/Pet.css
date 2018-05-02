@@ -1,7 +1,10 @@
-.pet-item {
-  height: 40vh;
+/* container styles */
+.pet-item-container {
+  position: relative;
   width: 22%;
   min-width: 200px;
+  max-width: 380px;
+  min-height: 500px;
   margin: 1.5%;
   border: 1px solid rgba(224, 227, 218, 0.2);
   background: white;
@@ -10,9 +13,9 @@
     0 2px 2px 0 rgba(0, 0, 0, 0.14), 
     0 1px 5px 0 rgba(0, 0, 0, 0.12), 
     0 3px 1px -2px rgba(0, 0, 0, 0.2);
-  position: relative;
 }
 
+/* image styles */
 .pet-item-image {
   height: 50%;
   overflow: hidden;
@@ -23,13 +26,16 @@
   max-height: 250px;
 }
 
+/* content styles */
 .pet-item-content {
-  height: 50%;
-  padding: 10px;
+  padding: 16px;
+  position: absolute;
+  bottom: 0;
 }
 
 .pet-item-content p {
-  margin: 10px 0;
+  margin: 0;
+  padding: 8px 0;
   font-size: 14px;
 }
 
@@ -38,11 +44,12 @@
   color: #566270;
 }
 
+/* button styles */
 .delete-button {
   position: absolute;
   top: -10px;
   right: -10px;
-  opacity: 0.8;
+  opacity: 0.5;
   color: red;
   background: #E0E3DA;
   border: none;
@@ -51,26 +58,33 @@
 }
 
 .delete-button:hover {
-  cursor: pointer;
+  top: -20px;
+  right: -20px;
   opacity: 1;
+  font-size: 18px;
+  font-weight: 700;
+  padding: 10px 14px;
+  transition: all 0.2s ease-out;
+  cursor: pointer;
 }
 
+/* @media rules */
 @media (max-width: 1000px) {
-  .pet-item {
+  .pet-item-container {
     width: 30%;
     margin: 1.66%;
   }
 }
 
 @media (max-width: 800px) {
-  .pet-item {
+  .pet-item-container {
     width: 45%;
     margin: 2.5%;
   }
 }
 
 @media (max-width: 500px) {
-  .pet-item {
+  .pet-item-container {
     width: 90%;
     margin: 5%;
   }
