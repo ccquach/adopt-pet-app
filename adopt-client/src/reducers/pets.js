@@ -1,11 +1,12 @@
-import { GET_PETS } from '../actions/index';
+import { LOAD_PETS, ADD_PET } from '../actions/index';
 
 const pets = (state = [], action) => {
   // debugger;
   switch (action.type) {
-    case GET_PETS:
-      // debugger;
+    case LOAD_PETS:
       return [ ...action.data ];
+    case ADD_PET:
+      return [ ...state, action.pet ];
     default:
       return state;
   }

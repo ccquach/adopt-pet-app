@@ -1,15 +1,21 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getPets } from '../actions/index';
+import { Route } from 'react-router-dom';
+import { loadPets, addPet } from '../actions/index';
 import Pet from '../components/Pet';
+import NewPetForm from './NewPetForm';
 import './PetList.css';
 
 class PetList extends Component {
   constructor(props) {
     super(props);
+    this.handleAdd = this.handleAdd.bind(this);
   }
   componentDidMount() {
-    this.props.getPets();
+    this.props.loadPets();
+  }
+  handleAdd(val) {
+    this.props.addPet(val);
   }
   render () {
     // debugger;
@@ -20,8 +26,15 @@ class PetList extends Component {
       />
     ));
     return(
-      <div className="pet-list">
-        {pets}
+      <div>
+        <Route exact path="/pets/new" component={props => (
+          <NewPetForm { ...props } onSubmit={ this.handleAdd } />
+        )} />
+        <Route exact path="/pets" component={() => (
+          <div className="pet-list">
+            {pets}
+          </div>
+        )} />
       </div>
     );
   }
@@ -34,4 +47,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, { getPets })(PetList);
+export default connect(mapStateToProps, { loadPets, addPet })(PetList);

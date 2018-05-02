@@ -16,16 +16,23 @@ class NewPetForm extends Component {
       img: ''
     };
     this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
   handleChange(e) {
     this.setState({ [e.target.name]: e.target.value });
+  }
+  handleSubmit(e) {
+    e.preventDefault();
+    this.props.onSubmit({ ...this.state });
+    e.target.reset();
+    this.props.history.push("/pets");
   }
   render () {
     const { name, age, gender, breed, color, img } = this.state;
     const breedOptions = getSelectOptions(BREEDS);
     const colorOptions = getSelectOptions(COLORS);
     return(
-      <form className="pet-form-container" onSubmit={() => {}}>
+      <form className="pet-form-container" onSubmit={this.handleSubmit}>
         {/* form inputs */}
         <div className="pet-input-section">
           <label htmlFor="pet-name-input">
