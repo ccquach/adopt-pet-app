@@ -25,13 +25,14 @@ class PetForm extends Component {
     const pets = this.props.pets;
     if (id && pets.length > 0) {
       const pet = pets.find(pet => pet._id === id);
+      const { name, age, gender, breed, color, img } = pet;
       this.setState({ 
-        name: pet.name,
-        age: pet.age,
-        gender: pet.gender,
-        breed: pet.breed,
-        color: pet.color,
-        img: pet.img
+        name,
+        age,
+        gender,
+        breed,
+        color,
+        img
       });
     }
   }
