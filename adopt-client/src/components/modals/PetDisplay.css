@@ -24,22 +24,3 @@
   font-size: 18px;
   padding: 4% 0;
 }
-
-.close-button {
-  position: absolute;
-  top: -10px;
-  right: -10px;
-  padding: 6px 9px;
-  opacity: 0.5;
-  background: #E0E3DA;
-  border: none;
-  border-radius: 25px;
-  z-index: 1;
-}
-
-.close-button:hover {
-  color: #f9320c;
-  opacity: 1;
-  transition: all 0.2s ease-out;
-  cursor: pointer;
-}
