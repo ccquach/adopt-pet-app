@@ -1,10 +1,9 @@
 export const SHOW_MODAL = "SHOW_MODAL";
 export const HIDE_MODAL = "HIDE_MODAL";
 
-export function showModal(pet) {
+export function showModal() {
   return {
-    type: SHOW_MODAL,
-    pet
+    type: SHOW_MODAL
   };
 }
 
