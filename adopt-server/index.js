@@ -11,6 +11,7 @@ const express    = require('express'),
 
 // require routes
 const petRoutes = require('./routes/pets');
+const breedRoutes = require('./routes/breeds');
 
 // app config
 app.use(bodyParser.json());
@@ -21,6 +22,7 @@ app.use(express.static(__dirname + '/public/assets/data'));
 
 // use routes
 app.use('/api/pets', petRoutes);
+app.use('/api/breeds', breedRoutes);
 
 // error handling
 app.use(function(req, res, next) {

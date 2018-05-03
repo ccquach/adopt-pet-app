@@ -17,3 +17,4 @@ mongoose.connect(databaseUri, databaseOptions)
 ;
 
 module.exports.Pet = require('./pet');
+module.exports.Breed = require('./breed');
