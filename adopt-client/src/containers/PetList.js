@@ -7,6 +7,9 @@ class PetList extends Component {
     super(props);
     this.handleDelete = this.handleDelete.bind(this);
   }
+  handleShowEdit(id) {
+    this.props.history.push(`/pets/${id}/edit`);
+  }
   handleDelete(id) {
     this.props.handleDelete(id);
   }
@@ -15,8 +18,9 @@ class PetList extends Component {
       <Pet
         key={pet._id}
         pet={pet}
-        onDelete={this.handleDelete.bind(this, pet._id)}
         onShow={this.props.handleShow}
+        onEdit={this.handleShowEdit.bind(this, pet._id)}
+        onDelete={this.handleDelete.bind(this, pet._id)}
       />
     ));
     return (

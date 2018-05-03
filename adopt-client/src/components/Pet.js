@@ -4,24 +4,16 @@ import './Pet.css';
 import PetContent from './PetContent';
 import IconButton from './IconButton';
 
-const Pet = ({ pet, onShow, onDelete }) => (
+const Pet = ({ pet, onShow, onEdit, onDelete }) => (
   <div className="pet-item-container">
     <IconButton
       type="edit"
-      onClick={() => <Link to={`/pets/${pet._id}/edit`} /> }
+      onClick={onEdit}
     />
     <IconButton
       type="delete"
       onClick={onDelete}
     />
-    {/* <button
-      className="update-button item-button"
-      type="button"
-    >
-      <Link to={`/pets/${pet._id}/edit`}>
-        <i className="fa fa-edit"></i>
-      </Link>
-    </button> */}
     <div className="pet-item">
       <div className="pet-item-image">
         <Link to={`/pets/${pet._id}`}>

@@ -68,8 +68,9 @@ class PetApp extends Component {
             />
           )} />
           {/* load */}
-          <Route exact path="/pets" render={() => (
+          <Route exact path="/pets" render={props => (
             <PetList
+            { ...props }
               pets={this.props.pets}
               handleDelete={this.handleDelete}
               handleShow={this.openModal}
