@@ -2,7 +2,7 @@ import React from 'react';
 import './PetContent.css';
 
 const PetContent = ({ pet }) => {
-  const { name, age, gender, color, breed, img, created_date } = pet;
+  const { name, age, gender, color, breed, created_date } = pet;
   const availableDate = new Date(created_date).toDateString();
   const genderDisplay = {
     "M": "Male",
