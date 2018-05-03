@@ -29,8 +29,9 @@ class PetApp extends Component {
   handleDelete(id) {
     this.props.deletePet(id);
   }
-  openModal() {
+  openModal(id) {
     this.props.showModal();
+    this.props.history.push(`/pets/${id}`);
   }
   closeModal() {
     this.props.hideModal();
@@ -60,17 +61,25 @@ class PetApp extends Component {
           )} />
           {/* show */}
           <Route path="/pets/:id" render={props => (
-            <PetDisplayModal
-              { ...props }
-              pets={this.props.pets}
-              isOpen={this.props.modalIsOpen}
-              onClose={this.closeModal}
-            />
+            <div>
+              <PetList
+                { ...props }
+                pets={this.props.pets}
+                handleDelete={this.handleDelete}
+                handleShow={this.openModal}
+              />
+              <PetDisplayModal
+                { ...props }
+                pets={this.props.pets}
+                isOpen={this.props.modalIsOpen}
+                onClose={this.closeModal}
+              />
+            </div>
           )} />
           {/* load */}
           <Route exact path="/pets" render={props => (
             <PetList
-            { ...props }
+              { ...props }
               pets={this.props.pets}
               handleDelete={this.handleDelete}
               handleShow={this.openModal}

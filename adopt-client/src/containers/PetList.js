@@ -3,9 +3,8 @@ import './PetList.css';
 import Pet from '../components/Pet';
 
 class PetList extends Component {
-  constructor(props) {
-    super(props);
-    this.handleDelete = this.handleDelete.bind(this);
+  handleShow(id) {
+    this.props.handleShow(id);
   }
   handleShowEdit(id) {
     this.props.history.push(`/pets/${id}/edit`);
@@ -18,7 +17,7 @@ class PetList extends Component {
       <Pet
         key={pet._id}
         pet={pet}
-        onShow={this.props.handleShow}
+        onShow={this.handleShow.bind(this, pet._id)}
         onEdit={this.handleShowEdit.bind(this, pet._id)}
         onDelete={this.handleDelete.bind(this, pet._id)}
       />
