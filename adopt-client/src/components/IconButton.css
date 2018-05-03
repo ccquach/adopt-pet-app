@@ -5,7 +5,6 @@
   background: #E0E3DA;
   border: none;
   border-radius: 25px;
-  z-index: 1;
 }
 
 .icon-button:hover {
@@ -60,6 +59,7 @@
   top: -10px;
   right: -10px;
   padding: 6px 9px;
+  z-index: 1;
 }
 
 .close-button:hover {
