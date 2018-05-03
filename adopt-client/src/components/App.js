@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import Navbar from './Navbar';
-import PetList from '../containers/PetList';
+import PetApp from '../containers/PetApp';
 import './App.css';
 
 class App extends Component {
@@ -9,7 +9,7 @@ class App extends Component {
     return (
       <div className="App">
         <Navbar />
-        <Route path="/pets" component={PetList} />
+        <Route path="/pets" component={PetApp} />
         <Route exact path="/" render={() => <Redirect to="/pets" />} />
       </div>
     );

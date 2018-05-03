@@ -1,4 +1,4 @@
-import { LOAD_PETS, ADD_PET, UPDATE_PET, DELETE_PET } from '../actions/index';
+import { LOAD_PETS, ADD_PET, UPDATE_PET, DELETE_PET } from '../actions/pets';
 
 const pets = (state = [], action) => {
   // debugger;

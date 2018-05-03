@@ -1,6 +1,5 @@
-export const LOAD_PETS   = "LOAD_PETS";
+export const LOAD_PETS  = "LOAD_PETS";
 export const ADD_PET    = "ADD_PET";
-export const SHOW_PET   = "SHOW_PET";
 export const UPDATE_PET = "UPDATE_PET";
 export const DELETE_PET = "DELETE_PET";
 
@@ -24,14 +23,14 @@ function handleUpdate(pet) {
   return {
     type: UPDATE_PET,
     pet
-  }
+  };
 }
 
 function handleDelete(id) {
   return {
     type: DELETE_PET,
     id
-  }
+  };
 }
 
 export function loadPets() {
@@ -70,7 +69,7 @@ export function updatePet(pet, id) {
       .then(res => res.json())
       .then(updatedPet => dispatch(handleUpdate(updatedPet)))
       .catch(err => console.log('Something went wrong.', err));
-  }
+  };
 }
 
 export function deletePet(id) {

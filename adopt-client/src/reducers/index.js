@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux';
 import pets from './pets';
+import modals from './modals';
 
 const rootReducer = combineReducers({
-  pets
+  pets,
+  modals
 });
 
 export default rootReducer;

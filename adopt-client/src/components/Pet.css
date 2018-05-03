@@ -26,24 +26,6 @@
   max-height: 250px;
 }
 
-/* content styles */
-.pet-item-content {
-  padding: 16px;
-  position: absolute;
-  bottom: 0;
-}
-
-.pet-item-content p {
-  margin: 0;
-  padding: 8px 0;
-  font-size: 14px;
-}
-
-.pet-content-label {
-  font-weight: 700;
-  color: #566270;
-}
-
 /* button styles */
 .item-button {
   position: absolute;
