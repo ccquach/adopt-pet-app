@@ -56,10 +56,12 @@
 
 /* close button styles */
 .close-button {
-  top: -10px;
-  right: -10px;
-  padding: 6px 9px;
+  top: 2px;
+  right: 5px;
+  padding: 10px 14px;
+  font-size: 18px;
   z-index: 1;
+  background: none;
 }
 
 .close-button:hover {

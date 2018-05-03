@@ -10,9 +10,10 @@
 }
 
 .pet-display-image img {
-  width: 98%;
-  height: 98%;
-  margin: 1%;
+  width: 100%;
+  height: 100%;
+  border-right: 2px solid rgba(86, 98, 112, 0.6);
+  border-radius: 28px 0 0 28px;
 }
 
 .pet-display-container .pet-item-content {
