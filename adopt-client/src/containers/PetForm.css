@@ -1,9 +1,4 @@
 /* container styles */
-.pet-form-container {
-  width: 100vw;
-  height: 100vh;
-}
-
 .pet-form {
   width: 90%;
   height: 420px;
@@ -19,12 +14,12 @@
   margin: 0 auto;
 }
 
-/* input styles */
+/* input section styles */
 .pet-input-section {
   display: block;
   float: left;
-  width: 30%;
   min-height: 350px;
+  width: 30%;
   margin: 0 1.66%;
 }
 
@@ -34,6 +29,7 @@
   margin: 20px 0;
 }
 
+/* radio input styles */
 #pet-gender-input .radio-label {
   padding-left: 10px;
   font-weight: 300;
@@ -47,16 +43,37 @@
   float: left;
 }
 
+/* text input field styles */
 .text-input-field {
   margin: 10px 0;
   width: 100%;
   height: 40px;
-  padding: 5px 10px;
+  padding: 5px 10px 5px 40px;
   border: 1px solid #ddd;
   border-radius: 5px;
   font-size: 16px;
 }
 
+.pet-input-section select {
+  cursor: pointer;
+}
+
+/* image input styles */
+#pet-img-preview {
+  display: block;
+  border: 1px solid rgba(86, 98, 112, 0.2);
+  width: 100%;
+  max-width: 300px;
+  max-height: 250px;
+  margin: 10px 0;
+}
+
+.image-formats {
+  margin: 0;
+  font-size: 12px;
+}
+
+/* input focus styles */
 .pet-input-section input[type="radio"]:focus,
 .text-input-field:focus {
   box-shadow: 0 0 0 1pt #A593E0;
@@ -65,29 +82,14 @@
   background-color: #fff;
 }
 
-.pet-input-section select {
-  cursor: pointer;
-}
-
-/* image styles */
-#pet-img-preview {
-  display: block;
-  border: 1px solid rgba(86, 98, 112, 0.2);
-  width: 100%;
-  max-width: 300px;
-  margin: 10px 0;
-  max-height: 250px;
-}
-
-.image-formats {
-  margin: 0;
-  font-size: 12px;
-}
-
-/* input error styles */
-.input-error {
+/* input validation styles */
+.input-error:not(:focus) {
   border: 1px solid #E53A40;
-  background-color: #FFEEE4;
+  background: no-repeat 10px 9px/20px url('../images/invalid.svg') #FFEEE4;
+}
+
+.text-input-field:valid:not(:focus) {
+  background: no-repeat 10px 9px/20px url('../images/check.svg') #fff;
 }
 
 /* button styles */
@@ -107,11 +109,7 @@
   cursor: pointer;
 }
 
-.submit-button:disabled {
-  background: #E0E3DA;
-  color: grey;
-}
-
+/* media rules */
 @media (max-width: 980px) {
   .pet-form {
     display: flex;
@@ -139,6 +137,6 @@
 
 @media (max-width: 720px) {
   .pet-form {
-    width: 85%;
+    width: 80%;
   }
 }

@@ -81,7 +81,6 @@ class PetForm extends Component {
 
     // data validations
     const errors = validate(this.state);
-    const isDisabled = Object.keys(errors).some(key => errors[key]);
     const shouldMarkError = field => {
       const hasError = errors[field];
       const shouldShow = this.state.touched[field];
@@ -107,6 +106,7 @@ class PetForm extends Component {
                 onChange={this.handleChange}
                 onBlur={this.handleBlur("name")}
                 autoFocus
+                required
               />
             </label>
             <label htmlFor="pet-age-input">
@@ -123,6 +123,7 @@ class PetForm extends Component {
                 autoComplete="off"
                 onChange={this.handleChange}
                 onBlur={this.handleBlur("age")}
+                required
               />
             </label>
             <label htmlFor="pet-gender-input">
@@ -138,6 +139,7 @@ class PetForm extends Component {
                       value="F"
                       checked={gender === "F"}
                       onBlur={this.handleBlur("gender")}
+                      required
                     />
                   </div>
                   <span className="radio-label">Female</span>
@@ -152,6 +154,7 @@ class PetForm extends Component {
                       value="M"
                       checked={gender === "M"}
                       onBlur={this.handleBlur("gender")}
+                      required
                     />
                   </div>
                   <span className="radio-label">Male</span>
@@ -170,6 +173,7 @@ class PetForm extends Component {
                 value={breed}
                 onChange={this.handleChange}
                 onBlur={this.handleBlur("breed")}
+                required
               >
                 {breedOptions}
               </select>
@@ -184,6 +188,7 @@ class PetForm extends Component {
                 value={color}
                 onChange={this.handleChange}
                 onBlur={this.handleBlur("color")}
+                required
               >
                 {colorOptions}
               </select>
@@ -200,6 +205,7 @@ class PetForm extends Component {
                 autoComplete="off"
                 onChange={this.handleChange}
                 onBlur={this.handleBlur("img")}
+                required
               />
             </label>
           </div>
@@ -208,7 +214,7 @@ class PetForm extends Component {
               Image Preview
               <img 
                 id="pet-img-preview"
-                src={img ? img : defaultImg} 
+                src={img ? (checkURL(img) ? img : notFoundImg) : defaultImg} 
                 alt="pet" 
                 onError={(e) => {
                   e.target.onError = null; 
@@ -224,7 +230,6 @@ class PetForm extends Component {
           <button 
             className="submit-button" 
             type="submit"
-            disabled={isDisabled}
           >
             Save
           </button>
