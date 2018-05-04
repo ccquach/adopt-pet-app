@@ -39,7 +39,13 @@ const petSchema = new mongoose.Schema({
   },
   img: {
     type: String,
-    required: 'Pet image required.'
+    validate: {
+      validator: function(filename) {
+        if (!filename) return;
+        return (/\.(bmp|jpeg|jpg|png|tiff)$/i).test(filename);
+      },
+      message: 'File provided not valid.'
+    }
   },
   created_date: {
     type: Date,
