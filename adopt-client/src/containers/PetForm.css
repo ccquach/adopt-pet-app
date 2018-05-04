@@ -88,7 +88,7 @@
   background: no-repeat 10px 9px/20px url('../images/invalid.svg') #FFEEE4;
 }
 
-.text-input-field:valid:not(:focus) {
+.text-input-field:valid:not(:focus):not(#pet-img-input) {
   background: no-repeat 10px 9px/20px url('../images/check.svg') #fff;
 }
 
@@ -107,6 +107,17 @@
   color: #FFFFF3;
   transition: all 0.2s linear;
   cursor: pointer;
+}
+
+.submit-button:focus {
+  background: #A593E0;
+  color: #FFFFF3;
+  outline: 0;
+}
+
+.submit-button:disabled {
+  background: #E0E3DA;
+  color: grey;
 }
 
 /* media rules */
