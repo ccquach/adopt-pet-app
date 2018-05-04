@@ -3,7 +3,7 @@ import './PetForm.css';
 import FormTitle from '../components/FormTitle';
 import defaultImg from '../images/img_default.png';
 
-const BREEDS = ["Dalmatian", "Irish Terrier", "Longhaired Whippet"];
+// const BREEDS = ["Dalmatian", "Irish Terrier", "Longhaired Whippet"];
 const COLORS = ['Brown', 'Black', 'Gray', 'White', 'Red'];
 
 class PetForm extends Component {
@@ -15,26 +15,37 @@ class PetForm extends Component {
       gender: '',
       breed: '',
       color: '',
-      img: ''
+      img: '',
+      breeds: []
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
   componentDidMount() {
-    const id = this.props.match.params.id;
-    const pets = this.props.pets;
-    if (id && pets.length > 0) {
-      const pet = pets.find(pet => pet._id === id);
-      const { name, age, gender, breed, color, img } = pet;
-      this.setState({ 
-        name,
-        age,
-        gender,
-        breed,
-        color,
-        img
-      });
-    }
+    const API_URL = 'http://localhost:3001/api/breeds/dogs';
+    fetch(API_URL)
+      .then(res => res.json())
+      .then(data => {
+        const breeds = data[0].breeds;
+        const id = this.props.match.params.id;
+        const pets = this.props.pets;
+        if (id && pets.length > 0) {
+          const pet = pets.find(pet => pet._id === id);
+          const { name, age, gender, breed, color, img } = pet;
+          this.setState({ 
+            name,
+            age,
+            gender,
+            breed,
+            color,
+            img,
+            breeds
+          });
+        } else {
+          this.setState({ breeds });
+        }
+      })
+      .catch(err => console.log('Something went wrong.', err));
   }
   handleChange(e) {
     this.setState({ [e.target.name]: e.target.value });
@@ -42,13 +53,14 @@ class PetForm extends Component {
   handleSubmit(e) {
     e.preventDefault();
     const id = this.props.match.params.id; 
-    this.props.onSubmit({ ...this.state }, id);
+    const { breeds, ...pet } = this.state;
+    this.props.onSubmit(pet, id);
     e.target.reset();
     this.props.history.push("/pets");
   }
   render () {
     const { name, age, gender, breed, color, img } = this.state;
-    const breedOptions = getSelectOptions(BREEDS);
+    const breedOptions = getSelectOptions(this.state.breeds);
     const colorOptions = getSelectOptions(COLORS);
     return(
       <div className="pet-form-container">
