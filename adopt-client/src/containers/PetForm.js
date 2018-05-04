@@ -237,7 +237,7 @@ class PetForm extends Component {
 function validate({ name, age, gender, breed, color, img }) {
   return {
     name: name.length === 0,
-    age: !Number.isFinite(+age),
+    age: !Number.isFinite(+age) || age.length === 0,
     gender: gender.toLowerCase() !== 'f' && gender.toLowerCase() !== 'm',
     breed: breed.length === 0,
     color: color.length === 0,
