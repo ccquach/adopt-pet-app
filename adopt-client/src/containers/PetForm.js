@@ -81,6 +81,7 @@ class PetForm extends Component {
 
     // data validations
     const errors = validate(this.state);
+    const isDisabled = Object.keys(errors).some(key => errors[key]);
     const shouldMarkError = field => {
       const hasError = errors[field];
       const shouldShow = this.state.touched[field];
@@ -200,12 +201,11 @@ class PetForm extends Component {
                 className={`text-input-field ${shouldMarkError('img') ? "input-error" : ""}`}
                 key="img"
                 name="img"
-                type="url"
+                type="text"
                 value={img}
                 autoComplete="off"
                 onChange={this.handleChange}
                 onBlur={this.handleBlur("img")}
-                required
               />
             </label>
           </div>
@@ -230,6 +230,7 @@ class PetForm extends Component {
           <button 
             className="submit-button" 
             type="submit"
+            disabled={isDisabled}
           >
             Save
           </button>
@@ -246,7 +247,7 @@ function validate({ name, age, gender, breed, color, img }) {
     gender: gender.toLowerCase() !== 'f' && gender.toLowerCase() !== 'm',
     breed: breed.length === 0,
     color: color.length === 0,
-    img: !checkURL(img)
+    img: img.length > 0 ? !checkURL(img) : false
   }
 }
 
