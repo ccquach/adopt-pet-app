@@ -210,8 +210,10 @@ class PetForm extends Component {
                 id="pet-img-preview"
                 src={img ? img : defaultImg} 
                 alt="pet" 
-                // TODO
-                onError={() => {this.onError = null; this.src = notFoundImg}}
+                onError={(e) => {
+                  e.target.onError = null; 
+                  e.target.src = notFoundImg
+                }}
               />
             </label>
             <p className="image-formats">
