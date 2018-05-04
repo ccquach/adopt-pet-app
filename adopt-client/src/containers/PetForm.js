@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import './PetForm.css';
 import FormTitle from '../components/FormTitle';
 import defaultImg from '../images/img_default.png';
+import notFoundImg from '../images/img_not_found.jpeg';
 
-// const BREEDS = ["Dalmatian", "Irish Terrier", "Longhaired Whippet"];
 const COLORS = ['Brown', 'Black', 'Gray', 'White', 'Red'];
 
 class PetForm extends Component {
@@ -16,10 +16,19 @@ class PetForm extends Component {
       breed: '',
       color: '',
       img: '',
-      breeds: []
+      breeds: [],
+      touched: {
+        name: false,
+        age: false,
+        gender: false,
+        breed: false,
+        color: false,
+        img: false
+      }
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleBlur = this.handleBlur.bind(this);
   }
   componentDidMount() {
     const API_URL = 'http://localhost:3001/api/breeds/dogs';
@@ -47,6 +56,11 @@ class PetForm extends Component {
       })
       .catch(err => console.log('Something went wrong.', err));
   }
+  handleBlur = field => e => {
+    this.setState({
+      touched: { ...this.state.touched, [field]: true }
+    });
+  }
   handleChange(e) {
     this.setState({ [e.target.name]: e.target.value });
   }
@@ -59,9 +73,21 @@ class PetForm extends Component {
     this.props.history.push("/pets");
   }
   render () {
+    // input values
     const { name, age, gender, breed, color, img } = this.state;
+    // dropdown options
     const breedOptions = getSelectOptions(this.state.breeds);
     const colorOptions = getSelectOptions(COLORS);
+
+    // data validations
+    const errors = validate(this.state);
+    const isDisabled = Object.keys(errors).some(key => errors[key]);
+    const shouldMarkError = field => {
+      const hasError = errors[field];
+      const shouldShow = this.state.touched[field];
+      return hasError ? shouldShow : false;
+    }
+
     return(
       <div className="pet-form-container">
         <FormTitle text={this.props.type} />
@@ -72,12 +98,14 @@ class PetForm extends Component {
               Name
               <input
                 id="pet-name-input"
+                className={`text-input-field ${shouldMarkError('name') ? "input-error" : ""}`}
                 key="name"
                 name="name"
                 type="text"
                 value={name}
                 autoComplete="off"
                 onChange={this.handleChange}
+                onBlur={this.handleBlur("name")}
                 autoFocus
               />
             </label>
@@ -85,6 +113,7 @@ class PetForm extends Component {
               Age
               <input
                 id="pet-age-input"
+                className={`text-input-field ${shouldMarkError('age') ? "input-error" : ""}`}
                 key="age"
                 name="age"
                 type="number"
@@ -93,32 +122,39 @@ class PetForm extends Component {
                 value={age}
                 autoComplete="off"
                 onChange={this.handleChange}
+                onBlur={this.handleBlur("age")}
               />
             </label>
             <label htmlFor="pet-gender-input">
               Gender
               <div id="pet-gender-input" onChange={this.handleChange}>
                 <label htmlFor="female-choice">
-                  <input
-                    id="female-choice"
-                    key="female"
-                    name="gender"
-                    type="radio"
-                    value="F"
-                    checked={gender === "F"}
-                  />
-                  Female
+                  <div className={`radio-container ${shouldMarkError('gender') ? "input-error" : ""}`}>
+                    <input
+                      id="female-choice"
+                      key="female"
+                      name="gender"
+                      type="radio"
+                      value="F"
+                      checked={gender === "F"}
+                      onBlur={this.handleBlur("gender")}
+                    />
+                  </div>
+                  <span className="radio-label">Female</span>
                 </label>
                 <label htmlFor="male-choice">
-                  <input
-                    id="male-choice"
-                    key="male"
-                    name="gender"
-                    type="radio"
-                    value="M"
-                    checked={gender === "M"}
-                  />
-                  Male
+                  <div className={`radio-container ${shouldMarkError('gender') ? "input-error" : ""}`}>
+                    <input
+                      id="male-choice"
+                      key="male"
+                      name="gender"
+                      type="radio"
+                      value="M"
+                      checked={gender === "M"}
+                      onBlur={this.handleBlur("gender")}
+                    />
+                  </div>
+                  <span className="radio-label">Male</span>
                 </label>
               </div>
             </label>
@@ -128,10 +164,12 @@ class PetForm extends Component {
               Breed
               <select 
                 id="pet-breed-input"
+                className={`text-input-field ${shouldMarkError('breed') ? "input-error" : ""}`}
                 key="breed"
                 name="breed"
                 value={breed}
                 onChange={this.handleChange}
+                onBlur={this.handleBlur("breed")}
               >
                 {breedOptions}
               </select>
@@ -140,10 +178,12 @@ class PetForm extends Component {
               Color
               <select
                 id="pet-color-input"
+                className={`text-input-field ${shouldMarkError('color') ? "input-error" : ""}`}
                 key="color"
                 name="color"
                 value={color}
                 onChange={this.handleChange}
+                onBlur={this.handleBlur("color")}
               >
                 {colorOptions}
               </select>
@@ -152,12 +192,14 @@ class PetForm extends Component {
               Image URL
               <input
                 id="pet-img-input"
+                className={`text-input-field ${shouldMarkError('img') ? "input-error" : ""}`}
                 key="img"
                 name="img"
-                type="text"
+                type="url"
                 value={img}
                 autoComplete="off"
                 onChange={this.handleChange}
+                onBlur={this.handleBlur("img")}
               />
             </label>
           </div>
@@ -168,17 +210,41 @@ class PetForm extends Component {
                 id="pet-img-preview"
                 src={img ? img : defaultImg} 
                 alt="pet" 
+                // TODO
+                onError={() => {this.onError = null; this.src = notFoundImg}}
               />
             </label>
+            <p className="image-formats">
+              <strong>Supported file formats</strong>: .bmp, .jpeg, .jpg, .png, .tiff
+            </p>
           </div>
           {/* submit button */}
-          <button className="submit-button" type="submit">
+          <button 
+            className="submit-button" 
+            type="submit"
+            disabled={isDisabled}
+          >
             Save
           </button>
         </form>
       </div>
     );
   }
+}
+
+function validate({ name, age, gender, breed, color, img }) {
+  return {
+    name: name.length === 0,
+    age: !Number.isFinite(+age),
+    gender: gender.toLowerCase() !== 'f' && gender.toLowerCase() !== 'm',
+    breed: breed.length === 0,
+    color: color.length === 0,
+    img: !checkURL(img)
+  }
+}
+
+function checkURL(url) {
+  return(url.match(/\.(bmp|jpeg|jpg|png|tiff)$/) != null);
 }
 
 function getSelectOptions(arr) {
