@@ -1,10 +1,12 @@
 /* container styles */
 .pet-form-container {
   width: 100vw;
+  height: 100vh;
 }
 
 .pet-form {
   width: 90%;
+  height: 400px;
   max-width: 1000px;
   display: block;
   border: 1px solid rgba(224, 227, 218, 0.2);
@@ -22,8 +24,8 @@
   display: block;
   float: left;
   width: 30%;
+  min-height: 320px;
   margin: 0 1.66%;
-  height: 40vh;
 }
 
 .pet-input-section label {
@@ -47,7 +49,18 @@
 .pet-input-section select {
   margin: 10px 0;
   width: 100%;
-  height: 25px;
+  height: 40px;
+  padding: 5px 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.pet-input-section input[type="text"]:focus,
+.pet-input-section input[type="number"]:focus,
+.pet-input-section input[type="radio"]:focus,
+.pet-input-section select:focus {
+  outline: 2px solid #A593E0;
 }
 
 .pet-input-section select {
@@ -55,8 +68,10 @@
 }
 
 #pet-img-preview {
+  display: block;
   border: 1px solid rgba(86, 98, 112, 0.2);
   width: 100%;
+  max-width: 300px;
   margin: 10px 0;
   max-height: 250px;
 }
@@ -76,4 +91,29 @@
   color: #FFFFF3;
   transition: all 0.2s linear;
   cursor: pointer;
+}
+
+@media (max-width: 980px) {
+  .pet-form {
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    height: auto;
+    margin-bottom: 20px;
+  }
+  
+  .pet-input-section {
+    width: 100%;
+    margin: 0;
+  }
+
+  #pet-img-preview {
+    margin: 20px auto;
+  }
+}
+
+@media (max-width: 720px) {
+  .pet-form {
+    width: 85%;
+  }
 }
