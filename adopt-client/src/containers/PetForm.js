@@ -3,8 +3,9 @@ import './PetForm.css';
 import FormTitle from '../components/FormTitle';
 import defaultImg from '../images/img_default.png';
 import notFoundImg from '../images/img_not_found.jpeg';
+import { API_URL, petPropCollections } from '../utils/constants';
 
-const COLORS = ['Brown', 'Black', 'Gray', 'White', 'Red'];
+const { COLORS } = petPropCollections;
 
 class PetForm extends Component {
   constructor(props) {
@@ -31,8 +32,7 @@ class PetForm extends Component {
     this.handleBlur = this.handleBlur.bind(this);
   }
   componentDidMount() {
-    const API_URL = 'http://localhost:3001/api/breeds/dogs';
-    fetch(API_URL)
+    fetch(API_URL.dogs)
       .then(res => res.json())
       .then(data => {
         const breeds = data[0].breeds;

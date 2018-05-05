@@ -1,11 +1,12 @@
-import { ajaxErrorHandler } from '../utils/errorHandlers';
+import { ajaxErrorHandler as errorHandler } from '../utils/errorHandlers';
+import { API_URL } from '../utils/constants';
+
+const URL = API_URL.pets;
 
 export const LOAD_PETS  = "LOAD_PETS";
 export const ADD_PET    = "ADD_PET";
 export const UPDATE_PET = "UPDATE_PET";
 export const DELETE_PET = "DELETE_PET";
-
-const API_URL = 'http://localhost:3001/api/pets/';
 
 function handleLoad(data) {
   return {
@@ -37,8 +38,8 @@ function handleDelete(id) {
 
 export function loadPets() {
   return dispatch => {
-    return fetch(API_URL)
-      .then(ajaxErrorHandler)
+    return fetch(URL)
+      .then(errorHandler)
       .then(data => dispatch(handleLoad(data)))
       .catch(err => console.log('Something went wrong.', err));
   };
@@ -46,14 +47,14 @@ export function loadPets() {
 
 export function addPet(pet) {
   return dispatch => {
-    return fetch(API_URL, {
+    return fetch(URL, {
       method: 'POST',
       headers: new Headers({
         'Content-Type': 'application/json'
       }),
       body: JSON.stringify(pet)
     })
-      .then(ajaxErrorHandler)
+      .then(errorHandler)
       .then(newPet => dispatch(handleAdd(newPet)))
       .catch(err => console.log('Something went wrong.', err));
   };
@@ -61,14 +62,14 @@ export function addPet(pet) {
 
 export function updatePet(pet, id) {
   return dispatch => {
-    return fetch(API_URL + id, {
+    return fetch(URL + id, {
       method: 'PUT',
       headers: new Headers({
         'Content-Type': 'application/json'
       }),
       body: JSON.stringify(pet)
     })
-      .then(ajaxErrorHandler)
+      .then(errorHandler)
       .then(updatedPet => dispatch(handleUpdate(updatedPet)))
       .catch(err => console.log('Something went wrong.', err));
   };
@@ -76,10 +77,10 @@ export function updatePet(pet, id) {
 
 export function deletePet(id) {
   return dispatch => {
-    return fetch(API_URL + id, {
+    return fetch(URL + id, {
       method: 'DELETE'
     })
-      .then(ajaxErrorHandler)
+      .then(errorHandler)
       .then(data => dispatch(handleDelete(id)))
       .catch(err => console.log('Something went wrong.', err));
   };
