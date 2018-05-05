@@ -1,8 +1,21 @@
 import React, { Component } from 'react';
-import './PetList.css';
+import PropTypes from 'prop-types';
+import { petPropTypes } from '../utils/propTypeValues';
 import Pet from '../components/Pet';
+import './PetList.css';
 
 class PetList extends Component {
+  static defaultProps = {
+    pets: [],
+    handleShow: () => {},
+    handleDelete: () => {}
+  };
+  static propTypes = {
+    pets: PropTypes.arrayOf(petPropTypes),
+    handleShow: PropTypes.func.isRequired,
+    handleDelete: PropTypes.func.isRequired,
+    history: PropTypes.object.isRequired
+  };
   handleShow(id) {
     this.props.handleShow(id);
   }

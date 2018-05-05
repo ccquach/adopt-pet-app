@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './IconButton.css';
 import 'font-awesome/css/font-awesome.min.css';
 
@@ -26,6 +27,13 @@ const IconButton = ({ type, onClick }) => {
       {buttonProps[type].icon}
     </button>
   );
+};
+IconButton.defaultProps = {
+  onClick: () => {}
+};
+IconButton.propTypes = {
+  type: PropTypes.string.isRequired,
+  onClick: PropTypes.func.isRequired
 };
 
 export default IconButton;

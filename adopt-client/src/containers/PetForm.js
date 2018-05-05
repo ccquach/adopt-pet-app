@@ -1,13 +1,26 @@
 import React, { Component } from 'react';
-import './PetForm.css';
+import PropTypes from 'prop-types';
+import { petPropTypes } from '../utils/propTypeValues';
 import FormTitle from '../components/FormTitle';
 import defaultImg from '../images/img_default.png';
 import notFoundImg from '../images/img_not_found.jpeg';
 import { API_URL, petPropCollections } from '../utils/constants';
+import './PetForm.css';
 
 const { COLORS } = petPropCollections;
 
 class PetForm extends Component {
+  static defaultProps = {
+    pets: [],
+    onSubmit: () => {}
+  };
+  static propTypes = {
+    pets: PropTypes.arrayOf(petPropTypes),
+    type: PropTypes.string.isRequired,
+    onSubmit: PropTypes.func.isRequired,
+    match: PropTypes.object.isRequired,
+    history: PropTypes.object.isRequired
+  };
   constructor(props) {
     super(props);
     this.state = {

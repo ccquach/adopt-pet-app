@@ -1,4 +1,5 @@
 import React from 'react';
+import { petPropTypes } from '../utils/propTypeValues';
 import './PetContent.css';
 
 const PetContent = ({ pet }) => {
@@ -31,5 +32,8 @@ const PetContent = ({ pet }) => {
     </div>
   );
 }
+PetContent.propTypes = {
+  pet: petPropTypes
+};
 
 export default PetContent;
