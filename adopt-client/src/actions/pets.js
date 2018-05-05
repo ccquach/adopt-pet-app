@@ -36,7 +36,7 @@ function handleDelete(id) {
 export function loadPets() {
   return dispatch => {
     return fetch(API_URL)
-      .then(res => res.json())
+      .then(errorHandler)
       .then(data => dispatch(handleLoad(data)))
       .catch(err => console.log('Something went wrong.', err));
   };
@@ -51,7 +51,7 @@ export function addPet(pet) {
       }),
       body: JSON.stringify(pet)
     })
-      .then(res => res.json())
+      .then(errorHandler)
       .then(newPet => dispatch(handleAdd(newPet)))
       .catch(err => console.log('Something went wrong.', err));
   };
@@ -66,7 +66,7 @@ export function updatePet(pet, id) {
       }),
       body: JSON.stringify(pet)
     })
-      .then(res => res.json())
+      .then(errorHandler)
       .then(updatedPet => dispatch(handleUpdate(updatedPet)))
       .catch(err => console.log('Something went wrong.', err));
   };
@@ -77,8 +77,23 @@ export function deletePet(id) {
     return fetch(API_URL + id, {
       method: 'DELETE'
     })
-      .then(res => res.json())
+      .then(errorHandler)
       .then(data => dispatch(handleDelete(id)))
       .catch(err => console.log('Something went wrong.', err));
   };
+}
+
+function errorHandler(res) {
+  if (!res.ok) {
+    if (res.status >= 400 && res.status < 500) {
+      return res.json().then(data => {
+        let err = { errorMessage: data.message };
+        throw err;
+      });
+    } else {
+      let err = { errorMessage: 'Please try again later, server is not responding' };
+      throw err;
+    }
+  }
+  return res.json();
 }
