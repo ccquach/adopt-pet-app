@@ -67,7 +67,7 @@ class PetForm extends Component {
   handleSubmit(e) {
     e.preventDefault();
     const id = this.props.match.params.id; 
-    const { breeds, ...pet } = this.state;
+    const { breeds, touched, ...pet } = this.state;
     this.props.onSubmit(pet, id);
     e.target.reset();
     this.props.history.push("/pets");
