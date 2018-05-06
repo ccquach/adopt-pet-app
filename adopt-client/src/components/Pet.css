@@ -4,7 +4,7 @@
   width: 22%;
   min-width: 200px;
   max-width: 380px;
-  min-height: 500px;
+  min-height: 400px;
   margin: 1.5%;
   border: 1px solid rgba(224, 227, 218, 0.2);
   background: white;
@@ -23,7 +23,7 @@
 
 .pet-item-image img {
   width: 100%;
-  max-height: 250px;
+  max-height: 200px;
   cursor: pointer;
 }
 
