@@ -1,21 +1,54 @@
-import { LOAD_PETS, ADD_PET, UPDATE_PET, DELETE_PET } from '../actions/pets';
+import { LOAD_PETS, ADD_PET, UPDATE_PET, DELETE_PET, GET_PAGE_PETS } from '../actions/pets';
 
-const pets = (state = [], action) => {
+const initialState = {
+  data: [],
+  totalCount: 0,
+  currentPage: 1
+}
+
+const pets = (state = initialState, action) => {
   // debugger;
-  let pets;
+  let data;
   switch (action.type) {
     case LOAD_PETS:
-      return [ ...action.data ];
+      return {
+        ...state,
+        data: [ ...action.pets ]
+      };
     case ADD_PET:
-      return [ ...state, action.pet ];
+      const perPage = 12;
+      const totalPets = state.data.length + 1;
+      const lastPage = Math.ceil(totalPets / perPage);
+      return {
+        ...state,
+        data: [ ...state.data, action.pet ],
+        totalCount: totalPets,
+        currentPage: lastPage
+      };
     case UPDATE_PET:
-      pets = state.map(pet => (
+      data = state.data.map(pet => (
         pet._id === action.pet._id ? action.pet : pet
       ));
-      return [ ...pets ];
+      return {
+        ...state,
+        data
+      };
     case DELETE_PET:
-      pets = state.filter(pet => pet._id !== action.id);
-      return [ ...pets ];
+      data = state.data.filter(pet => pet._id !== action.id);
+      return {
+        ...state,
+        data,
+        totalCount: data.length,
+        currentPage: 1
+      };
+    case GET_PAGE_PETS:
+      const { totalCount, currentPage } = action.result;
+      return { 
+        ...state, 
+        data: action.result.data,
+        totalCount,
+        currentPage
+      };
     default:
       return state;
   }
