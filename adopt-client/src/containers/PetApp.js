@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Switch, Route } from 'react-router-dom';
-import { loadPets, addPet, updatePet, deletePet } from '../actions/pets';
+import { loadPets, addPet, updatePet, deletePet, getPagePets } from '../actions/pets';
 import { showModal, hideModal } from '../actions/modals';
 import PetList from './PetList';
 import PetForm from './PetForm';
 import PetDisplayModal from '../components/modals/PetDisplayModal';
+import Pagination from '../components/Pagination';
 import './PetApp.css';
 
 class PetApp extends Component {
@@ -14,11 +15,16 @@ class PetApp extends Component {
     this.handleAdd = this.handleAdd.bind(this);
     this.handleUpdate = this.handleUpdate.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
+    this.handlePageChange = this.handlePageChange.bind(this);
     this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
   }
   componentDidMount() {
-    this.props.loadPets();
+    // debugger;
+    const queryPage = this.props.location.search.split("=")[1];
+    const initialPage = queryPage ? queryPage : 1;
+    this.props.getPagePets(initialPage);
+    this.props.history.push(`/pets/?page=${initialPage}`);
   }
   handleAdd(val) {
     this.props.addPet(val);
@@ -28,6 +34,10 @@ class PetApp extends Component {
   }
   handleDelete(id) {
     this.props.deletePet(id);
+  }
+  handlePageChange(page) {
+    this.props.getPagePets(page);
+    this.props.history.push(`/pets/?page=${page}`);
   }
   openModal(id) {
     this.props.showModal();
@@ -77,14 +87,21 @@ class PetApp extends Component {
             </div>
           )} />
           {/* load */}
-          <Route exact path="/pets" render={props => (
-            <PetList
-              { ...props }
-              pets={this.props.pets}
-              handleDelete={this.handleDelete}
-              handleShow={this.openModal}
-            />
-          )} />
+            <Route exact path="/pets" render={props => (
+              <div>
+                <PetList
+                  { ...props }
+                  pets={this.props.pets}
+                  handleDelete={this.handleDelete}
+                  handleShow={this.openModal}
+                />
+                <Pagination
+                  currentPage={+this.props.currentPage}
+                  petTotal={this.props.totalPets}
+                  onPageChange={this.handlePageChange}
+                />
+              </div>
+            )} />
         </Switch>
       </div>
     );
@@ -94,12 +111,14 @@ class PetApp extends Component {
 function mapStateToProps(state) {
   // debugger;
   return {
-    pets: state.pets,
-    modalIsOpen: state.modals,
+    pets: state.pets.data,
+    totalPets: state.pets.totalCount,
+    currentPage: state.pets.currentPage,
+    modalIsOpen: state.modals
   };
 }
 
 export default connect(
   mapStateToProps, 
-  { loadPets, addPet, updatePet, deletePet, showModal, hideModal }
+  { loadPets, addPet, updatePet, deletePet, getPagePets, showModal, hideModal }
 )(PetApp);
