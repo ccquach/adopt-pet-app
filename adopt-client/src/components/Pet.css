@@ -28,6 +28,12 @@
 }
 
 /* @media rules */
+@media (min-width: 2000px) {
+  .pet-item-container {
+    margin: 1.5% 3%;
+  }
+}
+
 @media (max-width: 1000px) {
   .pet-item-container {
     width: 30%;
@@ -42,7 +48,7 @@
   }
 }
 
-@media (max-width: 500px) {
+@media (max-width: 760px) {
   .pet-item-container {
     width: 90%;
     margin: 5%;

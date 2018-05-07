@@ -2,6 +2,7 @@
   padding: 16px;
   position: absolute;
   bottom: 0;
+  width: 100%;
 }
 
 .pet-item-content p {
