@@ -3,15 +3,16 @@ import { API_URL } from '../utils/constants';
 
 const URL = API_URL.pets;
 
-export const LOAD_PETS  = "LOAD_PETS";
-export const ADD_PET    = "ADD_PET";
-export const UPDATE_PET = "UPDATE_PET";
-export const DELETE_PET = "DELETE_PET";
+export const LOAD_PETS     = "LOAD_PETS";
+export const ADD_PET       = "ADD_PET";
+export const UPDATE_PET    = "UPDATE_PET";
+export const DELETE_PET    = "DELETE_PET";
+export const GET_PAGE_PETS = "GET_PAGE_PETS";
 
-function handleLoad(data) {
+function handleLoad(pets) {
   return {
     type: LOAD_PETS,
-    data
+    pets
   };
 }
 
@@ -33,6 +34,13 @@ function handleDelete(id) {
   return {
     type: DELETE_PET,
     id
+  };
+}
+
+function handlePagePets(result) {
+  return {
+    type: GET_PAGE_PETS,
+    result
   };
 }
 
@@ -62,7 +70,7 @@ export function addPet(pet) {
 
 export function updatePet(pet, id) {
   return dispatch => {
-    return fetch(URL + id, {
+    return fetch(`${URL}/${id}`, {
       method: 'PUT',
       headers: new Headers({
         'Content-Type': 'application/json'
@@ -77,11 +85,20 @@ export function updatePet(pet, id) {
 
 export function deletePet(id) {
   return dispatch => {
-    return fetch(URL + id, {
+    return fetch(`${URL}/${id}`, {
       method: 'DELETE'
     })
       .then(errorHandler)
       .then(data => dispatch(handleDelete(id)))
       .catch(err => console.log('Something went wrong.', err));
   };
+}
+
+export function getPagePets(page) {
+  return dispatch => {
+    return fetch(`${URL}?page=${page}`)
+      .then(errorHandler)
+      .then(data => dispatch(handlePagePets(data)))
+      .catch(err => console.log('Something went wrong.', err));
+  }
 }
