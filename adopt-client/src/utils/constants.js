@@ -1,7 +1,7 @@
-const BASE_URL = 'http://localhost:3001/api';
+const API_ROOT = 'http://localhost:3001/api';
 export const API_URL = {
-  pets: BASE_URL + '/pets/',
-  dogs: BASE_URL + '/breeds/dogs'
+  pets: API_ROOT + '/pets',
+  dogs: API_ROOT + '/breeds/dogs'
 };
 
 export const petPropCollections = {
