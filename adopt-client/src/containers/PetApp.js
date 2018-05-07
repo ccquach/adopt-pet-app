@@ -34,7 +34,9 @@ class PetApp extends Component {
     history.push(`/pets/?page=${lastPage}`);
   }
   handleUpdate(pet, id) {
-    this.props.updatePet(pet, id);
+    const { updatePet, history } = this.props;
+    updatePet(pet, id);
+    history.push(`/pets/?page=${this.props.currentPage}`);
   }
   handleDelete(id) {
     this.props.deletePet(id);
