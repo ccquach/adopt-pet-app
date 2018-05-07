@@ -1,0 +1,10 @@
+#page-numbers {
+  list-style: none;
+  display: flex;
+}
+
+#page-numbers > li {
+  margin-right: 0.3em;
+  user-select: none;
+  cursor: pointer;
+}
