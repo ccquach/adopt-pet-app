@@ -1,9 +1,17 @@
 const db = require('../models');
 
 exports.getPets = function(req, res, next) {
-  db.Pet.find({})
-    .then(pets => res.json(pets))
-    .catch(err => next(err));
+  if (req.query.page) {
+    // pagination
+    db.Pet.paginate(req.query.page)
+      .then(result => res.json(result))
+      .catch(err => next(err));
+  } else {
+    // all
+    db.Pet.find({})
+      .then(pets => res.json(pets))
+      .catch(err => next(err));
+  }
 };
 
 exports.addPet = function(req, res, next) {
