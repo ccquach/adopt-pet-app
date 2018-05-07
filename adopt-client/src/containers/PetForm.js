@@ -83,7 +83,6 @@ class PetForm extends Component {
     const { breeds, touched, ...pet } = this.state;
     this.props.onSubmit(pet, id);
     e.target.reset();
-    this.props.history.push("/pets");
   }
   render () {
     // input values

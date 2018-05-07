@@ -17,7 +17,7 @@ const pets = (state = initialState, action) => {
       };
     case ADD_PET:
       const perPage = 12;
-      const totalPets = state.data.length + 1;
+      const totalPets = state.totalCount + 1;
       const lastPage = Math.ceil(totalPets / perPage);
       return {
         ...state,
@@ -42,6 +42,7 @@ const pets = (state = initialState, action) => {
         currentPage: 1
       };
     case GET_PAGE_PETS:
+      // debugger;
       const { totalCount, currentPage } = action.result;
       return { 
         ...state, 

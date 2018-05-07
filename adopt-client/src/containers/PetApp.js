@@ -27,7 +27,11 @@ class PetApp extends Component {
     this.props.history.push(`/pets/?page=${initialPage}`);
   }
   handleAdd(val) {
-    this.props.addPet(val);
+    const { totalPets, addPet, getPagePets, history } = this.props;
+    const lastPage = Math.ceil((totalPets + 1) / 12);
+    addPet(val);
+    getPagePets(lastPage);
+    history.push(`/pets/?page=${lastPage}`);
   }
   handleUpdate(pet, id) {
     this.props.updatePet(pet, id);
@@ -45,7 +49,7 @@ class PetApp extends Component {
   }
   closeModal() {
     this.props.hideModal();
-    this.props.history.push("/pets");
+    this.props.history.push(`/pets/${this.props.currentPage}`);
   }
   render () {
     // debugger;
@@ -112,8 +116,8 @@ function mapStateToProps(state) {
   // debugger;
   return {
     pets: state.pets.data,
-    totalPets: state.pets.totalCount,
-    currentPage: state.pets.currentPage,
+    totalPets: +state.pets.totalCount,
+    currentPage: +state.pets.currentPage,
     modalIsOpen: state.modals
   };
 }
