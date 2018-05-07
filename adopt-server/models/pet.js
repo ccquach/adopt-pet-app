@@ -53,6 +53,34 @@ const petSchema = new mongoose.Schema({
   }
 });
 
+petSchema.statics.paginate = function(currentPage) {
+  const limit = 12;
+  const skip = (currentPage - 1) * limit;
+  let totalCount;
+
+  // count documents
+  this.count({})
+    .then(count => totalCount = count)
+    .catch(err => {
+      totalCount = 0;
+      next(err);
+    });
+
+  // get paginated documents
+  return this.find({})
+    .limit(limit)
+    .skip(skip)
+      .then(data => {
+        const result = {
+          totalCount,
+          currentPage,
+          data
+        };
+        return result;
+      })
+      .catch(err => next(err));
+}
+
 function capitalize(val) {
   if (typeof val !== 'string') val = '';
   return val.charAt(0).toUpperCase() + val.substring(1).toLowerCase();
