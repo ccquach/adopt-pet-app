@@ -6,7 +6,7 @@ import { showModal, hideModal } from '../actions/modals';
 import PetList from './PetList';
 import PetForm from './PetForm';
 import PetDisplayModal from '../components/modals/PetDisplayModal';
-import Pagination from '../components/Pagination';
+import Pagination from './Pagination';
 import './PetApp.css';
 
 class PetApp extends Component {

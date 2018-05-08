@@ -1,0 +1,20 @@
+.page-number {
+  margin-right: 0.6em;
+  user-select: none;
+}
+
+.page-number > a {
+  text-decoration: none;
+  color: #566270;
+}
+
+.page-number > a.active {
+  color: #A593E0;
+  font-weight: 700;
+}
+
+.page-number > a.disable-click {
+  color: #E0E3DA;
+  cursor: not-allowed;
+  pointer-events: none;
+}
