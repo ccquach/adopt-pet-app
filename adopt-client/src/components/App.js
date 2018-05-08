@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Redirect } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import Navbar from './Navbar';
 import PetApp from '../containers/PetApp';
 import './App.css';
@@ -9,8 +9,12 @@ class App extends Component {
     return (
       <div className="App">
         <Navbar />
-        <Route path="/pets" component={PetApp} />
-        <Route exact path="/" render={() => <Redirect to="/pets" />} />
+        <Switch>
+          <Route exact path="/pets/page/:page" component={PetApp} />
+          <Route exact path="/pets" render={() => <Redirect to="/pets/page/1" />} />
+          <Route exact path="/" render={() => <Redirect to="/pets" />} />
+          <Route path="/pets" component={PetApp} />
+        </Switch>
       </div>
     );
   }
