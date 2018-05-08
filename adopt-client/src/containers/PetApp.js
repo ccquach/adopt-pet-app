@@ -20,7 +20,6 @@ class PetApp extends Component {
     this.closeModal = this.closeModal.bind(this);
   }
   componentDidMount() {
-    // debugger;
     const currentPage = this.props.match.params.page;
     if (currentPage) {
       this.props.getPagePets(currentPage);
@@ -42,7 +41,6 @@ class PetApp extends Component {
   }
   handlePageChange(page) {
     this.props.getPagePets(page);
-    this.props.history.push(`/pets/page/${page}`);
   }
   openModal(id) {
     this.props.showModal();
@@ -53,7 +51,7 @@ class PetApp extends Component {
     this.props.history.push(`/pets/page/${this.props.currentPage}`);
   }
   render () {
-    debugger;
+    // debugger;
     return(
       <div>
         <Switch>
@@ -114,7 +112,7 @@ class PetApp extends Component {
 }
 
 function mapStateToProps(state) {
-  debugger;
+  // debugger;
   return {
     pets: state.pets.data,
     totalPets: +state.pets.totalCount,

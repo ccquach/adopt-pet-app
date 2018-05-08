@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import './Pagination.css';
 
 const Pagination = ({ currentPage, petTotal, onPageChange }) => {
@@ -11,10 +12,9 @@ const Pagination = ({ currentPage, petTotal, onPageChange }) => {
   const renderPageNumbers = pageNumbers.map(number => (
     <li
       key={number}
-      id={number}
       onClick={(e) => onPageChange(e.target.id)}
     >
-      {number}
+      <Link id={number} to={`/pets/page/${number}`}>{number}</Link>
     </li>
   ));
   return (
