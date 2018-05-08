@@ -4,8 +4,11 @@ import { Link } from 'react-router-dom';
 import './PageLink.css';
 
 const PageLink = ({ onPageChange, className, path, text }) => (
-  <li className="page-number" onClick={onPageChange}>
-    <Link className={className} to={path}>
+  <li 
+    className={className ? `page-number ${className}` : 'page-number'} 
+    onClick={onPageChange}
+  >
+    <Link to={path}>
       {text}
     </Link>
   </li>

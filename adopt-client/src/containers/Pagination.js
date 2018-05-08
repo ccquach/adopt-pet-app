@@ -76,7 +76,7 @@ class Pagination extends Component {
     });
 
     return (
-      <ul id="page-numbers">
+      <ul id="pagination">
         {/* previous page */}
         <PageLink
           onPageChange={this.handlePageChange.bind(this, prevId)}
