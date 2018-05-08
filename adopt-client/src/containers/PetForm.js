@@ -19,7 +19,6 @@ class PetForm extends Component {
     type: PropTypes.string.isRequired,
     onSubmit: PropTypes.func.isRequired,
     match: PropTypes.object.isRequired,
-    history: PropTypes.object.isRequired
   };
   constructor(props) {
     super(props);

@@ -21,29 +21,28 @@ class PetApp extends Component {
   }
   componentDidMount() {
     // debugger;
-    const queryPage = this.props.location.search.split("=")[1];
-    const initialPage = queryPage ? queryPage : 1;
-    this.props.getPagePets(initialPage);
-    this.props.history.push(`/pets/?page=${initialPage}`);
+    const currentPage = this.props.match.params.page;
+    if (currentPage) {
+      this.props.getPagePets(currentPage);
+    }
   }
   handleAdd(val) {
-    const { totalPets, addPet, getPagePets, history } = this.props;
-    const lastPage = Math.ceil((totalPets + 1) / 12);
-    addPet(val);
-    getPagePets(lastPage);
-    history.push(`/pets/?page=${lastPage}`);
+    const perPage = 12;
+    const lastPage = Math.ceil((this.props.totalPets + 1) / perPage);
+    this.props.addPet(val, lastPage);
+    this.props.history.push(`/pets/page/${lastPage}`);
   }
   handleUpdate(pet, id) {
-    const { updatePet, history } = this.props;
-    updatePet(pet, id);
-    history.push(`/pets/?page=${this.props.currentPage}`);
+    this.props.updatePet(pet, id);
+    this.props.history.push(`/pets/page/${this.props.currentPage}`);
   }
   handleDelete(id) {
     this.props.deletePet(id);
+    this.props.history.push(`/pets/page/1`);
   }
   handlePageChange(page) {
     this.props.getPagePets(page);
-    this.props.history.push(`/pets/?page=${page}`);
+    this.props.history.push(`/pets/page/${page}`);
   }
   openModal(id) {
     this.props.showModal();
@@ -51,10 +50,10 @@ class PetApp extends Component {
   }
   closeModal() {
     this.props.hideModal();
-    this.props.history.push(`/pets/${this.props.currentPage}`);
+    this.props.history.push(`/pets/page/${this.props.currentPage}`);
   }
   render () {
-    // debugger;
+    debugger;
     return(
       <div>
         <Switch>
@@ -67,7 +66,7 @@ class PetApp extends Component {
             />
           )} />
           {/* update */}
-          <Route path="/pets/:id/edit" render={props => (
+          <Route exact path="/pets/:id/edit" render={props => (
             <PetForm 
               { ...props } 
               type="Edit" 
@@ -76,7 +75,7 @@ class PetApp extends Component {
             />
           )} />
           {/* show */}
-          <Route path="/pets/:id" render={props => (
+          <Route exact path="/pets/:id" render={props => (
             <div>
               <PetList
                 { ...props }
@@ -93,7 +92,7 @@ class PetApp extends Component {
             </div>
           )} />
           {/* load */}
-            <Route exact path="/pets" render={props => (
+            <Route exact path="/pets/page/:page" render={props => (
               <div>
                 <PetList
                   { ...props }
@@ -115,7 +114,7 @@ class PetApp extends Component {
 }
 
 function mapStateToProps(state) {
-  // debugger;
+  debugger;
   return {
     pets: state.pets.data,
     totalPets: +state.pets.totalCount,
