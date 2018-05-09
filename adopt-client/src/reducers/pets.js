@@ -9,7 +9,7 @@ const initialState = {
 
 const pets = (state = initialState, action) => {
   // debugger;
-  let data, payload;
+  let data;
   switch (action.type) {
     case LOAD_PETS:
       return {
@@ -17,13 +17,13 @@ const pets = (state = initialState, action) => {
         data: [ ...action.pets ]
       };
     case ADD_PET:
-      payload = action.data.result;
       const perPage = 12;
-      const lastPage = Math.ceil(payload.totalCount / perPage);
+      const newTotal = state.totalCount + 1;
+      const lastPage = Math.ceil(newTotal / perPage);
       return {
         ...state,
-        data: payload.data,
-        totalCount: payload.totalCount,
+        data: [ ...state.data, action.pet ],
+        totalCount: newTotal,
         currentPage: lastPage,
         isLoading: true
       };
@@ -36,12 +36,10 @@ const pets = (state = initialState, action) => {
         data
       };
     case DELETE_PET:
-      payload = action.data.result;
       return {
         ...state,
-        data: payload.data,
-        totalCount: payload.totalCount,
-        currentPage: payload.currentPage
+        totalCount: state.totalCount - 1,
+        currentPage: 1
       };
     case GET_PAGE_PETS:
       return { 

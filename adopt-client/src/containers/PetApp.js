@@ -26,14 +26,16 @@ class PetApp extends Component {
     }
   }
   componentDidUpdate(prevProps) {
-    if (this.props.location.pathname !== prevProps.location.pathname) {
-      this.handlePageChange(this.props.match.params.page);
+    const isDiffLocation = (this.props.location.pathname !== prevProps.location.pathname);
+    const page = this.props.match.params.page;
+    if (isDiffLocation && page) {
+      this.handlePageChange(page);
     }
   }
   handleAdd(val) {
     const perPage = 12;
     const lastPage = Math.ceil((this.props.totalPets + 1) / perPage);
-    this.props.addPet(val, lastPage);
+    this.props.addPet(val);
     this.props.history.push(`/pets/page/${lastPage}`);
   }
   handleUpdate(pet, id) {
@@ -123,6 +125,14 @@ class PetApp extends Component {
 
 function mapStateToProps(state) {
   // debugger;
+  // console.log(`
+  //  {
+  //   pets: ${state.pets.data},
+  //   totalPets: ${+state.pets.totalCount},
+  //   currentPage: ${+state.pets.currentPage},
+  //   modalIsOpen: ${state.modals}
+  //  } 
+  // `);
   return {
     pets: state.pets.data,
     totalPets: +state.pets.totalCount,

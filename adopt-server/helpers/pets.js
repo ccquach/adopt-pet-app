@@ -16,14 +16,7 @@ exports.getPets = function(req, res, next) {
 
 exports.addPet = function(req, res, next) {
   db.Pet.create(req.body)
-    .then(newPet => {
-      return db.Pet.paginate(req.query.page)
-        .then(result => res.status(201).json({
-          newPet,
-          result
-        }))
-        .catch(err => next(err));
-    })
+    .then(newPet => res.status(201).json(newPet))
     .catch(err => next(err));
 };
 
@@ -41,14 +34,7 @@ exports.updatePet = function(req, res, next) {
 
 exports.deletePet = function(req, res, next) {
   db.Pet.findByIdAndRemove(req.params.id)
-    .then(() => {
-      return db.Pet.paginate(req.query.page)
-        .then(result => res.status(201).json({
-          message: 'Pet deleted.',
-          result
-        }))
-        .catch(err => next(err));
-    })
+    .then(() => res.json({ message: 'Pet deleted.' }))
     .catch(err => next(err));
 };
 

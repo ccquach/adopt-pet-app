@@ -16,10 +16,10 @@ function handleLoad(pets) {
   };
 }
 
-function handleAdd(data) {
+function handleAdd(pet) {
   return {
     type: ADD_PET,
-    data
+    pet
   };
 }
 
@@ -53,9 +53,9 @@ export function loadPets() {
   };
 }
 
-export function addPet(pet, page) {
+export function addPet(pet) {
   return dispatch => {
-    return fetch(`${URL}?page=${page}`, {
+    return fetch(URL, {
       method: 'POST',
       headers: new Headers({
         'Content-Type': 'application/json'
@@ -83,11 +83,11 @@ export function updatePet(pet, id) {
   };
 }
 
-export function deletePet(id, page = 1) {
+export function deletePet(id) {
   return dispatch => {
-    return fetch(`${URL}/${id}?page=${page}`, {
-      method: 'DELETE'
-    })
+    return fetch(`${URL}/${id}`, {
+        method: 'DELETE'
+      })
       .then(errorHandler)
       .then(data => dispatch(handleDelete(data)))
       .catch(err => console.log('Something went wrong.', err));
