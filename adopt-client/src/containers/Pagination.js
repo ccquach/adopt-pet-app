@@ -13,17 +13,18 @@ class Pagination extends Component {
   };
   constructor(props) {
     super(props);
+    const { petTotal, currentPage } = this.props;
     this.state = {
-      previous: undefined,
-      next: undefined,
-      last: undefined
+      previous: currentPage - 1 || undefined,
+      next: currentPage + 1 || undefined,
+      last: Math.ceil(petTotal / petsPerPage) || undefined
     }
   }
   componentWillReceiveProps(nextProps) {
     const { previous, next, last } = this.state;
     const isUndefined = (
-      previous === undefined && 
-      next === undefined &&
+      previous === undefined || 
+      next === undefined ||
       last === undefined
     );
     const isDiffCurrent = (this.props.currentPage !== nextProps.currentPage);
@@ -64,7 +65,7 @@ class Pagination extends Component {
         <Link
           to={`/pets/page/${previous}`}
           id={`PREV-${previous}`}
-          className={previous < 1 ? 'disable-click' : ''}
+          className={previous < 1 || !previous ? 'disable-click' : ''}
         >
           <i className="fa fa-angle-double-left" title="Previous page"></i>
         </Link>
