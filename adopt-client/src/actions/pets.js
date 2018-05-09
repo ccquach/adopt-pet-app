@@ -7,7 +7,18 @@ export const LOAD_PETS     = "LOAD_PETS";
 export const ADD_PET       = "ADD_PET";
 export const UPDATE_PET    = "UPDATE_PET";
 export const DELETE_PET    = "DELETE_PET";
-export const GET_PAGE_PETS = "GET_PAGE_PETS";
+export const REQUEST_PAGE_PETS = "REQUEST_PAGE_PETS";
+export const RECEIVE_PAGE_PETS = "RECEIVE_PAGE_PETS";
+
+const requestPagePets = page => ({
+  type: REQUEST_PAGE_PETS,
+  page
+});
+
+const receivePagePets = result => ({
+  type: RECEIVE_PAGE_PETS,
+  result
+});
 
 function handleLoad(pets) {
   return {
@@ -34,13 +45,6 @@ function handleDelete(data) {
   return {
     type: DELETE_PET,
     data
-  };
-}
-
-function handlePagePets(result) {
-  return {
-    type: GET_PAGE_PETS,
-    result
   };
 }
 
@@ -94,11 +98,10 @@ export function deletePet(id) {
   };
 }
 
-export function getPagePets(page) {
-  return dispatch => {
-    return fetch(`${URL}?page=${page}`)
-      .then(errorHandler)
-      .then(data => dispatch(handlePagePets(data)))
-      .catch(err => console.log('Something went wrong.', err));
-  }
+export const getPagePets = page => dispatch => {
+  dispatch(requestPagePets(page))
+  return fetch(`${URL}?page=${page}`)
+    .then(errorHandler)
+    .then(data => dispatch(receivePagePets(data)))
+    .catch(err => console.log('Something went wrong.', err));
 }

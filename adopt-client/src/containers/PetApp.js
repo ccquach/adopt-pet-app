@@ -7,6 +7,7 @@ import PetList from './PetList';
 import PetForm from './PetForm';
 import PetDisplayModal from '../components/modals/PetDisplayModal';
 import Pagination from './Pagination';
+import Loading from '../components/Loading';
 import './PetApp.css';
 
 class PetApp extends Component {
@@ -61,6 +62,7 @@ class PetApp extends Component {
   render () {
     // debugger;
     return(
+      this.props.isFetching ? <Loading /> :
       <div>
         <Switch>
           {/* create */}
@@ -134,11 +136,13 @@ function mapStateToProps(state) {
   //   modalIsOpen: ${state.modals}
   //  } 
   // `);
+  const { pets, modals } = state;
   return {
-    pets: state.pets.data,
-    totalPets: +state.pets.totalCount,
-    currentPage: +state.pets.currentPage,
-    modalIsOpen: state.modals
+    pets: pets.data,
+    totalPets: +pets.totalCount,
+    currentPage: +pets.currentPage,
+    isFetching: pets.isFetching,
+    modalIsOpen: modals
   };
 }
 

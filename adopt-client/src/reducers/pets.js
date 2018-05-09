@@ -1,10 +1,13 @@
-import { LOAD_PETS, ADD_PET, UPDATE_PET, DELETE_PET, GET_PAGE_PETS } from '../actions/pets';
+import { 
+  LOAD_PETS, ADD_PET, UPDATE_PET, DELETE_PET, 
+  REQUEST_PAGE_PETS, RECEIVE_PAGE_PETS
+} from '../actions/pets';
 
 const initialState = {
   data: [],
   totalCount: 0,
   currentPage: 1,
-  isLoading: false
+  isFetching: false
 }
 
 const pets = (state = initialState, action) => {
@@ -24,8 +27,7 @@ const pets = (state = initialState, action) => {
         ...state,
         data: [ ...state.data, action.pet ],
         totalCount: newTotal,
-        currentPage: lastPage,
-        isLoading: true
+        currentPage: lastPage
       };
     case UPDATE_PET:
       data = state.data.map(pet => (
@@ -41,14 +43,19 @@ const pets = (state = initialState, action) => {
         totalCount: state.totalCount - 1,
         currentPage: 1
       };
-    case GET_PAGE_PETS:
-      return { 
-        ...state, 
-        data: action.result.data,
-        totalCount: action.result.totalCount,
-        currentPage: action.result.currentPage,
-        isLoading: false
-      };
+      case REQUEST_PAGE_PETS:
+        return {
+          ...state,
+          isFetching: true
+        }
+      case RECEIVE_PAGE_PETS:
+        return {
+          ...state,
+          isFetching: false,
+          data: action.result.data,
+          totalCount: action.result.totalCount,
+          currentPage: action.result.currentPage
+        }
     default:
       return state;
   }
