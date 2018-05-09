@@ -1,19 +1,15 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import PageLink from '../components/PageLink';
+import { Link } from 'react-router-dom';
 import './Pagination.css';
 import 'font-awesome/css/font-awesome.min.css';
 
 const petsPerPage = 12;
 
 class Pagination extends Component {
-  static defaultProps = {
-    onPageChange: () => {}
-  };
   static propTypes = {
     currentPage: PropTypes.number.isRequired,
     petTotal: PropTypes.number.isRequired,
-    onPageChange: PropTypes.func.isRequired
   };
   constructor(props) {
     super(props);
@@ -22,7 +18,6 @@ class Pagination extends Component {
       next: undefined,
       last: undefined
     }
-    this.handlePageChange = this.handlePageChange.bind(this);
   }
   componentWillReceiveProps(nextProps) {
     const { previous, next, last } = this.state;
@@ -41,21 +36,9 @@ class Pagination extends Component {
       });
     }
   }
-  handlePageChange(id) {
-    const page = +id.split("-")[1];
-    if (page > 0 && page <= this.state.last) {
-      this.props.onPageChange(page);
-      this.setState({
-        previous: page - 1,
-        next: page + 1
-      });
-    }
-  }
   render() {
     const { currentPage, petTotal } = this.props;
     const { previous, next } = this.state;
-    const prevId = `PREV-${previous}`;
-    const nextId = `NEXT-${next}`;
     const pageNumbers = [];
 
     // get page numbers
@@ -63,37 +46,42 @@ class Pagination extends Component {
       pageNumbers.push(i);
     }
     const renderPageNumbers = pageNumbers.map(number => {
-      const pageId = `CURR-${number}`;
       return (
-        <PageLink
+        <Link
           key={number}
-          onPageChange={this.handlePageChange.bind(this, pageId)}
-          className={number === currentPage ? 'active' : null}
-          path={`/pets/page/${number}`}
-          text={number}
-        />
+          to={`/pets/page/${number}`}
+          id={`CURR-${number}`}
+          className={number === currentPage ? 'active' : ''}
+        >
+          {number}
+        </Link>
       );
     });
 
     return (
-      <ul id="pagination">
+      <div id="pagination">
         {/* previous page */}
-        <PageLink
-          onPageChange={this.handlePageChange.bind(this, prevId)}
-          className={previous < 1 ? 'disable-click' : null}
-          path={`/pets/page/${previous}`}
-          text={<i className="fa fa-angle-double-left" title="Previous page"></i>}
-        />
+        <Link
+          to={`/pets/page/${previous}`}
+          id={`PREV-${previous}`}
+          className={previous < 1 ? 'disable-click' : ''}
+        >
+          <i className="fa fa-angle-double-left" title="Previous page"></i>
+        </Link>
+
         {/* page numbers */}
         {renderPageNumbers}
+
         {/* next page */}
-        <PageLink
-          onPageChange={this.handlePageChange.bind(this, nextId)}
+        <Link
+          to={`/pets/page/${next}`}
+          id={`NEXT-${next}`}
           className={next > this.state.last ? 'disable-click' : null}
-          path={`/pets/page/${next}`}
-          text={<i className="fa fa-angle-double-right" title="Next page"></i>}
-        />
-      </ul>
+        >
+          {/* &raquo; */}
+          <i className="fa fa-angle-double-right" title="Next page"></i>
+        </Link>
+      </div>
     );
   }
 }

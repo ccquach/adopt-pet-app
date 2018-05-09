@@ -25,6 +25,11 @@ class PetApp extends Component {
       this.props.getPagePets(currentPage);
     }
   }
+  componentDidUpdate(prevProps) {
+    if (this.props.location.pathname !== prevProps.location.pathname) {
+      this.handlePageChange(this.props.match.params.page);
+    }
+  }
   handleAdd(val) {
     const perPage = 12;
     const lastPage = Math.ceil((this.props.totalPets + 1) / perPage);
