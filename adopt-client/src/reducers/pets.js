@@ -43,19 +43,19 @@ const pets = (state = initialState, action) => {
         totalCount: state.totalCount - 1,
         currentPage: 1
       };
-      case REQUEST_PAGE_PETS:
-        return {
-          ...state,
-          isFetching: true
-        }
-      case RECEIVE_PAGE_PETS:
-        return {
-          ...state,
-          isFetching: false,
-          data: action.result.data,
-          totalCount: action.result.totalCount,
-          currentPage: action.result.currentPage
-        }
+    case REQUEST_PAGE_PETS:
+      return {
+        ...state,
+        isFetching: true
+      }
+    case RECEIVE_PAGE_PETS:
+      return {
+        ...state,
+        isFetching: false,
+        data: action.result.data,
+        totalCount: action.result.totalCount,
+        currentPage: action.result.currentPage
+      }
     default:
       return state;
   }
