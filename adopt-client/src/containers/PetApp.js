@@ -30,6 +30,7 @@ class PetApp extends Component {
     const page = this.props.match.params.page;
     if (isDiffLocation && page) {
       this.handlePageChange(page);
+      window.scrollTo(0, 0);
     }
   }
   handleAdd(val) {
