@@ -81,6 +81,11 @@ class PetApp extends Component {
                 handleDelete={this.handleDelete}
                 handleShow={this.openModal}
               />
+              <Pagination
+                  currentPage={+this.props.currentPage}
+                  petTotal={this.props.totalPets}
+                  onPageChange={this.handlePageChange}
+                />
               <PetDisplayModal
                 { ...props }
                 pets={this.props.pets}
