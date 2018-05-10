@@ -8,6 +8,7 @@ import PetForm from './PetForm';
 import PetDisplayModal from '../components/modals/PetDisplayModal';
 import Pagination from './Pagination';
 import Loading from '../components/Loading';
+import FlashMessage from '../components/FlashMessage';
 import './PetApp.css';
 
 class PetApp extends Component {
@@ -60,10 +61,18 @@ class PetApp extends Component {
     this.props.history.push(`/pets/page/${this.props.currentPage}`);
   }
   render () {
-    // debugger;
+    debugger;
     return(
       this.props.isFetching ? <Loading /> :
       <div>
+        {
+          this.props.flashMessage.isDisplayed ?
+          <FlashMessage 
+            message={this.props.flashMessage.message}
+            className={this.props.flashMessage.className}
+          /> :
+          null
+        }
         <Switch>
           {/* create */}
           <Route exact path="/pets/new" render={props => (
@@ -127,7 +136,7 @@ class PetApp extends Component {
 }
 
 function mapStateToProps(state) {
-  // debugger;
+  debugger;
   // console.log(`
   //  {
   //   pets: ${state.pets.data},
@@ -136,13 +145,14 @@ function mapStateToProps(state) {
   //   modalIsOpen: ${state.modals}
   //  } 
   // `);
-  const { pets, modals } = state;
+  const { pets, modals, flashMessage } = state;
   return {
     pets: pets.data,
     totalPets: +pets.totalCount,
     currentPage: +pets.currentPage,
     isFetching: pets.isFetching,
-    modalIsOpen: modals
+    modalIsOpen: modals,
+    flashMessage
   };
 }
 

@@ -1,5 +1,6 @@
 import { ajaxErrorHandler as errorHandler } from '../utils/errorHandlers';
 import { API_URL } from '../utils/constants';
+import { sendFlashMessage } from './flashMessage';
 
 const URL = API_URL.pets;
 
@@ -79,7 +80,7 @@ export const deletePet = id => dispatch => {
   })
     .then(errorHandler)
     .then(data => dispatch(handleDelete(data)))
-    .catch(err => console.log('Something went wrong.', err));
+    .catch(err => dispatch(sendFlashMessage('Failed to delete pet.', 'alert-danger')));
 }
 
 export const getPagePets = page => dispatch => {

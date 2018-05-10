@@ -1,0 +1,47 @@
+.flash-message {
+  position: absolute;
+  height: 40px;
+  width: 100%;
+  max-width: 1900px;
+  padding: 8px 20px;
+  color: #fff;
+  animation: slider 8s;
+  z-index: 10;
+}
+
+.flash-message > p {
+  margin: 0;
+  font-size: 16px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.label {
+  font-weight: 700;
+  margin-right: 10px;
+}
+
+.message {
+  font-weight: 300;
+  font-style: italic;
+}
+
+.alert-danger {
+  background: linear-gradient(135deg, #f0223e, #f34238);
+}
+
+@keyframes slider {
+  0% {
+    top: 65px;
+  }
+  40%, 75% {
+    top: 105px;
+  }
+  99% {
+    opacity: 1;
+  }
+  100% {
+    top: 65px;
+    opacity: 0;
+  }
+}

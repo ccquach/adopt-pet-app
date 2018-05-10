@@ -5,6 +5,7 @@ header {
   align-items: center;
   background: #566270;
   padding: 10px 0;
+  z-index: 100;
 }
 
 header h1 {
