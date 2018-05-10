@@ -57,8 +57,13 @@ export const addPet = pet => dispatch => {
     body: JSON.stringify(pet)
   })
     .then(errorHandler)
-    .then(data => dispatch(handleAdd(data)))
-    .catch(err => console.log('Something went wrong.', err));
+    .then(data => {
+      dispatch(handleAdd(data));
+      dispatch(sendFlashMessage('New pet has been added.', 'alert-success'));
+    })
+    .catch(err => dispatch(sendFlashMessage(`
+      Something went wrong when trying to add new pet. { Issue: ${ err.errorMessage } }
+    `, 'alert-danger')));
 }
 
 export const updatePet = (pet, id) => dispatch => {
@@ -70,8 +75,13 @@ export const updatePet = (pet, id) => dispatch => {
     body: JSON.stringify(pet)
   })
     .then(errorHandler)
-    .then(updatedPet => dispatch(handleUpdate(updatedPet)))
-    .catch(err => console.log('Something went wrong.', err));
+    .then(updatedPet => {
+      dispatch(handleUpdate(updatedPet));
+      dispatch(sendFlashMessage('Pet has been updated.', 'alert-success'));
+    })
+    .catch(err => dispatch(sendFlashMessage(`
+      Something went wrong when trying to update pet. { Issue: ${ err.errorMessage } }
+    `, 'alert-danger')));
 }
 
 export const deletePet = id => dispatch => {
@@ -79,8 +89,13 @@ export const deletePet = id => dispatch => {
     method: 'DELETE'
   })
     .then(errorHandler)
-    .then(data => dispatch(handleDelete(data)))
-    .catch(err => dispatch(sendFlashMessage('Failed to delete pet.', 'alert-danger')));
+    .then(data => {
+      dispatch(handleDelete(data));
+      dispatch(sendFlashMessage(data.message, 'alert-success'));
+    })
+    .catch(err => dispatch(sendFlashMessage(`
+      Failed to delete pet. { Issue: ${err.errorMessage} }
+    `, 'alert-danger')));
 }
 
 export const getPagePets = page => dispatch => {
@@ -88,5 +103,7 @@ export const getPagePets = page => dispatch => {
   return fetch(`${URL}?page=${page}`)
     .then(errorHandler)
     .then(data => dispatch(receivePagePets(data)))
-    .catch(err => console.log('Something went wrong.', err));
+    .catch(err => dispatch(sendFlashMessage(`
+      Failed to load pets. { Issue: ${err.errorMessage} }
+    `, 'alert-danger')));
 }

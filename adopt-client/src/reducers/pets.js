@@ -11,7 +11,6 @@ const initialState = {
 }
 
 const pets = (state = initialState, action) => {
-  // debugger;
   let data;
   switch (action.type) {
     case LOAD_PETS:

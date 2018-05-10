@@ -61,7 +61,7 @@ class PetApp extends Component {
     this.props.history.push(`/pets/page/${this.props.currentPage}`);
   }
   render () {
-    debugger;
+    // debugger;
     return(
       this.props.isFetching ? <Loading /> :
       <div>
@@ -136,7 +136,7 @@ class PetApp extends Component {
 }
 
 function mapStateToProps(state) {
-  debugger;
+  // debugger;
   // console.log(`
   //  {
   //   pets: ${state.pets.data},

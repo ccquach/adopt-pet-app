@@ -7,7 +7,6 @@ const intialState = {
 };
 
 const flashMessage = (state = intialState, action) => {
-  debugger;
   switch (action.type) {
     case SHOW_FLASH_MESSAGE:
       const { message, className } = action.payload;
@@ -18,10 +17,7 @@ const flashMessage = (state = intialState, action) => {
         isDisplayed: true
       }
     case HIDE_FLASH_MESSAGE:
-      return {
-        ...state,
-        isDisplayed: false
-      };
+      return intialState;
     default:
       return intialState;
   }

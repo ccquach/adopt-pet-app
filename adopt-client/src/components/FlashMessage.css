@@ -27,7 +27,15 @@
 }
 
 .alert-danger {
-  background: linear-gradient(135deg, #f0223e, #f34238);
+  background: linear-gradient(135deg, #C65146, #EC6A5C);
+}
+
+.alert-success {
+  background: linear-gradient(135deg, #3b8686, #79bd9a);
+}
+
+.alert-warning {
+  background: linear-gradient(135deg, #fc913a, #fdc23e);
 }
 
 @keyframes slider {
