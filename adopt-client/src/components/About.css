@@ -1,0 +1,63 @@
+/* general styles */
+#about {
+  background-color: #fff;
+}
+
+#about section {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#about h2 {
+  font-size: 30px;
+}
+
+#about section > p {
+  width: 80%;
+  font-size: 14px;
+}
+
+#about section:nth-child(2n) {
+  background-color: #A593E0;
+  color: #fffff3;
+}
+
+#about section:not(:first-of-type) {
+  height: 100vh;
+}
+
+/* description styles */
+#description {
+  height: 85vh;
+}
+
+/* animals styles */
+.animals {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.animals > div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 150px;
+  height: 150px;
+  margin: 0 15px;
+}
+
+.animals > div:hover {
+  border-radius: 25px;
+  background-color: #566270;
+  color: #FFFFF3;
+  transition: all .5s linear;
+  transition-property: background-color, color;
+}
+
+.animals i {
+  font-size: 100px;
+}
