@@ -8,6 +8,7 @@
 #pagination > a {
   user-select: none;
   border: 1px solid #E0E3DA;
+  background-color: #fff;
   margin: 0;
   padding: 10px 15px;
   text-decoration: none;
@@ -29,7 +30,7 @@
 
 /* link styles */
 #pagination > a:hover:not(.disable-click):not(.active) {
-  background-color: rgba(224, 227, 218, 0.5);
+  background-color: rgba(165, 147, 224, 0.6);
 }
 
 #pagination > a.active {
