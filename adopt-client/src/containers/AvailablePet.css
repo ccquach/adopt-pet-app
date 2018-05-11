@@ -1,0 +1,51 @@
+.available-animal-card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 150px;
+  height: 150px;
+  margin: 0 15px;
+  color: #fffff3;
+}
+
+.available-animal-card i {
+  text-align: center;
+  font-size: 100px;
+}
+
+.count-display {
+  user-select: none;
+  text-align: center;
+}
+
+.count-display > p {
+  margin: 0;
+}
+
+.count-display p:first-of-type {
+  font-size: 3.0em;
+  font-weight: 700;
+}
+
+.count-display p:last-of-type {
+  font-size: 1.2em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 860px) {
+  .available-animal-card {
+    position: relative;
+    width: 35%;
+    padding-top: 35%;
+    margin: auto 7.5%;
+  }
+
+  .available-animal-card i,
+  .count-display {
+    position: absolute;
+    top: 25%;
+    right: 0;
+    bottom: 0;
+    left: 0;
+  }
+}

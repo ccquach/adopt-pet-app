@@ -1,36 +1,40 @@
 import React from 'react';
+import AvailablePet from '../containers/AvailablePet';
 import './About.css';
-import '../icons/icofont/css/icofont.css';
+import descriptionImg from '../images/about/patrick-hendry-221863-unsplash.jpg';
+import missionImg from '../images/about/nicolas-tessari-218491-unsplash.jpg';
+import availableImg from '../images/about/wyatt-ryan-367017-unsplash.jpg';
 
 const About = () => (
   <div id="about">
-    <section id="description">
+    <section 
+      id="description"
+      style={{ backgroundImage: `url(${descriptionImg})` }}
+    >
       <h2>About us</h2>
       <p>
-        Pastrami buffalo pork belly pancetta cow bresaola. Shankle flank ribeye andouille beef, spare ribs chuck frankfurter beef ribs kielbasa ball tip chicken swine ham hock. Shoulder pork rump, chuck turducken tongue capicola jowl pancetta andouille. Short ribs chicken bacon, turkey buffalo swine brisket chuck tri-tip tenderloin pork loin kielbasa ham. Chicken pork meatball, ham hock venison short loin rump ribeye burgdoggen beef ribs landjaeger strip steak flank pork loin meatloaf. Doner frankfurter pork loin alcatra.
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent id tempus neque, sed maximus eros. Cras sit amet nulla lectus. Fusce eget faucibus sem. Vivamus sed ultrices ligula, ultrices molestie arcu. Duis nec ex congue, venenatis erat sed, finibus risus. Curabitur in dolor lorem. Fusce massa sem, fringilla quis arcu at, sodales dictum urna.
       </p>
     </section>
-    <section id="mission">
+    <section 
+      id="mission"
+      style={{ backgroundImage: `url(${missionImg})` }}
+    >
       <h2>Our Mission</h2>
       <p>
-        Spicy jalapeno bacon ipsum dolor amet strip steak pig pastrami rump kielbasa pork loin, boudin short loin burgdoggen doner corned beef ham filet mignon landjaeger fatback. Chuck capicola kielbasa, ham flank biltong brisket ball tip boudin picanha frankfurter leberkas. Beef ribs ham hock cow brisket beef sirloin ground round porchetta kevin shankle pork belly. Jerky strip steak sirloin, turducken pastrami cupim spare ribs.
+        Sed pharetra tortor sem, nec fermentum nunc posuere nec. Sed id odio ac ligula facilisis venenatis. Aliquam erat volutpat. Nullam id convallis dolor. Proin ut pellentesque arcu, vitae gravida turpis. Donec congue lacus non turpis sollicitudin condimentum vitae sit amet nulla. Fusce convallis tempus dapibus.
       </p>
     </section>
-    <section>
+    <section 
+      id="available"
+      style={{ backgroundImage: `url(${availableImg})` }}
+    >
       <h2>Animals looking for a home</h2>
       <div className="animals">
-        <div>
-          <i className="icofont icofont-animal-dog-alt"></i>
-        </div>
-        <div>
-          <i className="icofont icofont-animal-cat"></i>
-        </div>
-        <div>
-          <i className="icofont icofont-animal-pigeon-alt"></i>
-        </div>
-        <div>
-          <i className="icofont icofont-animal-frog"></i>
-        </div>
+        <AvailablePet animal="dogs" />
+        <AvailablePet animal="cats" />
+        <AvailablePet animal="birds" />
+        <AvailablePet animal="frogs" />
       </div>
     </section>
   </div>
