@@ -9,7 +9,7 @@ import PetDisplayModal from '../components/modals/PetDisplayModal';
 import Pagination from './Pagination';
 import Loading from '../components/Loading';
 import FlashMessage from '../components/FlashMessage';
-import NotFound from '../components/NotFound';
+import NoResultsFound from '../components/errors/NoResultsFound';
 import './PetApp.css';
 
 class PetApp extends Component {
@@ -62,7 +62,7 @@ class PetApp extends Component {
     this.props.history.push(`/pets/page/${this.props.currentPage}`);
   }
   render () {
-    // debugger;
+    debugger;
     return(
       this.props.isFetching ? <Loading /> :
       <div>
@@ -131,7 +131,7 @@ class PetApp extends Component {
                 />
               </div>
             } else {
-              return <NotFound />
+              return <NoResultsFound />
             }
           }} />
         </Switch>

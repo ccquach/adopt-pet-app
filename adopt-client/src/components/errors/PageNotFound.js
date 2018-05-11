@@ -1,11 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './NotFound.css';
+import './PageNotFound.css';
 
-const NotFound = () => (
+const PageNotFound = () => (
   <div id='oopss'>
     <div id='error-text'>
-      <div className='bounce'>
+      <div className='page-not-found-bounce'>
         <div className='r'>
           <span>404</span>
         </div>
@@ -21,4 +21,4 @@ const NotFound = () => (
   </div>
 );
 
-export default NotFound;
+export default PageNotFound;

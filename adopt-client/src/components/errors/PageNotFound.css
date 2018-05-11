@@ -1,8 +1,5 @@
 /* Source: https://codepen.io/abhinav789singh/pen/PqKGgP */
 
-@import url(https://fonts.googleapis.com/css?family=Roboto:900);
-@import url(https://fonts.googleapis.com/css?family=Open+Sans);
-
 #oopss  {
   background: #FFFFF3;
   text-align: center;
@@ -126,7 +123,7 @@
   animation: fade .6s cubic-bezier(.68, .06, .68, .42) infinite alternate;
 }
 
-.bounce {
+.page-not-found-bounce {
   position: absolute;
   left: 50%;
   margin-left: -100px;
