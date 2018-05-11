@@ -1,5 +1,7 @@
 /* container styles */
 .pet-form {
+  background-color: #fff;
+  color: #566270;
   width: 90%;
   height: 420px;
   max-width: 1000px;

@@ -3,7 +3,9 @@ import PropTypes from 'prop-types';
 import './FormTitle.css';
 
 const FormTitle = ({ text }) => (
-  <h2>{text} Pet Form</h2>
+  <h2 class="form-title">
+    {text} Pet Form
+  </h2>
 );
 FormTitle.defaultProps = {
   text: ''
