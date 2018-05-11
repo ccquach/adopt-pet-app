@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import Navbar from './Navbar';
 import PetApp from '../containers/PetApp';
+import NotFound from './NotFound';
 import './App.css';
 
 class App extends Component {
@@ -14,6 +15,7 @@ class App extends Component {
           <Route exact path="/pets" render={() => <Redirect to="/pets/page/1" />} />
           <Route exact path="/" render={() => <Redirect to="/pets" />} />
           <Route path="/pets" component={PetApp} />
+          <Route component={NotFound} />
         </Switch>
       </div>
     );

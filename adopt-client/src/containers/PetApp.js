@@ -9,6 +9,7 @@ import PetDisplayModal from '../components/modals/PetDisplayModal';
 import Pagination from './Pagination';
 import Loading from '../components/Loading';
 import FlashMessage from '../components/FlashMessage';
+import NotFound from '../components/NotFound';
 import './PetApp.css';
 
 class PetApp extends Component {
@@ -23,7 +24,7 @@ class PetApp extends Component {
   }
   componentDidMount() {
     const currentPage = this.props.match.params.page;
-    if (currentPage) {
+    if (currentPage && Number.isFinite(+currentPage)) {
       this.props.getPagePets(currentPage);
     }
   }
@@ -114,8 +115,9 @@ class PetApp extends Component {
             </div>
           )} />
           {/* load */}
-            <Route exact path="/pets/page/:page" render={props => (
-              <div>
+          <Route exact path="/pets/page/:page" render={props => {
+            if (this.props.pets.length > 0) {
+              return <div>
                 <PetList
                   { ...props }
                   pets={this.props.pets}
@@ -128,7 +130,10 @@ class PetApp extends Component {
                   onPageChange={this.handlePageChange}
                 />
               </div>
-            )} />
+            } else {
+              return <NotFound />
+            }
+          }} />
         </Switch>
       </div>
     );
