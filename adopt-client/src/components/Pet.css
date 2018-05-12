@@ -2,10 +2,10 @@
 .pet-item-container {
   position: relative;
   width: 22%;
-  min-width: 200px;
+  min-width: 255px;
   max-width: 380px;
   min-height: 400px;
-  margin: 1.5%;
+  margin: 1%;
   border: 1px solid rgba(224, 227, 218, 0.2);
   background: white;
   border-radius: 0 0 2px 2px;
@@ -34,14 +34,14 @@
   }
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 1200px) {
   .pet-item-container {
     width: 30%;
     margin: 1.66%;
   }
 }
 
-@media (max-width: 800px) {
+@media (max-width: 890px) {
   .pet-item-container {
     width: 45%;
     margin: 2.5%;
@@ -52,5 +52,9 @@
   .pet-item-container {
     width: 90%;
     margin: 5%;
+  }
+
+  .pet-item-image img {
+    max-height: 190px;
   }
 }
