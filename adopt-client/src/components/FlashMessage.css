@@ -2,7 +2,6 @@
   position: absolute;
   height: 40px;
   width: 100%;
-  max-width: 1900px;
   padding: 8px 20px;
   color: #fff;
   animation: slider 8s;
@@ -40,16 +39,16 @@
 
 @keyframes slider {
   0% {
-    top: 65px;
+    top: 55px;
   }
   40%, 75% {
-    top: 105px;
+    top: 90px;
   }
   99% {
     opacity: 1;
   }
   100% {
-    top: 65px;
+    top: 55px;
     opacity: 0;
   }
 }
