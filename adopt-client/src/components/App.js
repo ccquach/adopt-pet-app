@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import Navbar from './Navbar';
+import Footer from './Footer';
 import About from './About';
 import PetApp from '../containers/PetApp';
 import PageNotFound from './errors/PageNotFound';
@@ -19,6 +20,7 @@ class App extends Component {
           <Route path="/pets" component={PetApp} />
           <Route component={PageNotFound} />
         </Switch>
+        <Footer />
       </div>
     );
   }

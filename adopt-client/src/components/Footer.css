@@ -1,0 +1,28 @@
+footer {
+  height: 60px;
+  width: 100%;
+  background-color: #566270;
+  color: #fffff3;
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+footer > span:first-of-type {
+  padding-left: 25px;
+}
+
+footer > span:last-of-type {
+  padding-right: 25px;
+}
+
+footer a {
+  text-decoration: none;
+  color: #fffff3;
+}
+
+footer a:hover {
+  color: #A593E0;
+}
