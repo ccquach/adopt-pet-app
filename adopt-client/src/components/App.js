@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 import Navbar from './Navbar';
 import Footer from './Footer';
 import About from './About';
@@ -8,6 +10,11 @@ import PageNotFound from './errors/PageNotFound';
 import './App.css';
 
 class App extends Component {
+  componentDidMount() {
+    AOS.init({
+      duration: 2000
+    });
+  }
   render() {
     return (
       <div className="App">
